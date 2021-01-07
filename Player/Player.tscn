@@ -1,0 +1,11 @@
+[gd_scene format=2]
+
+[node name="Player" type="Node2D"]
+
+[node name="Abilities" type="Node2D" parent="."]
+
+[node name="ReelIn" type="Node2D" parent="Abilities"]
+
+[node name="GiveItSlack" type="Node2D" parent="Abilities"]
+
+[node name="Sprite" type="Sprite" parent="."]
