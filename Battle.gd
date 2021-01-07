@@ -1,5 +1,7 @@
 extends Node2D
 
+signal win;
+
 onready var player = $Player;
 onready var enemy = $Enemy;
 
@@ -14,6 +16,13 @@ func play_turn():
 	yield(player, "turn_finished")
 	enemy.play_turn()
 	yield(enemy, "turn_finished")
+	check_end();
+	
+func check_end():
+	if distance == 0:
+		emit_signal("win")
+	#TODO: Loss condition
+	play_turn()
 
 func on_move(distance_change: int, tension_change: int):
 	distance += distance_change;
