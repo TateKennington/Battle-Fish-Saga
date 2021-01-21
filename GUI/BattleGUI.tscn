@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://TensionBar.gd" type="Script" id=1]
+[ext_resource path="res://GUI/Components/TensionBar/TensionBar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 
 [node name="BattleGUI" type="Control"]
@@ -22,17 +22,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TensionBar" type="Control" parent="StatsPanel"]
-anchor_right = 1.0
-margin_left = 12.0
-margin_top = 8.0
-margin_right = -8.0
-margin_bottom = 43.0
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-value = -37.0
+[node name="TensionBar" parent="StatsPanel" instance=ExtResource( 1 )]
 
 [node name="MovesPanel" type="Panel" parent="."]
 anchor_left = 0.785
@@ -59,25 +49,24 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="MovesPanel/MoveLabels"]
-margin_top = -1.0
 margin_right = 73.0
-margin_bottom = 29.0
+margin_bottom = 30.0
 rect_min_size = Vector2( 0, 30 )
 text = "Reel"
 valign = 1
 
 [node name="Label2" type="Label" parent="MovesPanel/MoveLabels"]
-margin_top = 33.0
+margin_top = 34.0
 margin_right = 73.0
-margin_bottom = 63.0
+margin_bottom = 64.0
 rect_min_size = Vector2( 0, 30 )
 text = "Reel"
 valign = 1
 
 [node name="Label3" type="Label" parent="MovesPanel/MoveLabels"]
-margin_top = 67.0
+margin_top = 68.0
 margin_right = 73.0
-margin_bottom = 97.0
+margin_bottom = 98.0
 rect_min_size = Vector2( 0, 30 )
 text = "Reel"
 valign = 1
