@@ -2,6 +2,8 @@ tool
 
 extends Control
 
+class_name TensionBar
+
 export(float) var value setget set_value;
 
 func set_value(new_value: float):

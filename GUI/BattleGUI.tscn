@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://GUI/Components/TensionBar/TensionBar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://GUI/BattleGUI.gd" type="Script" id=3]
 
 [node name="BattleGUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -23,6 +25,7 @@ __meta__ = {
 }
 
 [node name="TensionBar" parent="StatsPanel" instance=ExtResource( 1 )]
+value = 10.0
 
 [node name="MovesPanel" type="Panel" parent="."]
 anchor_left = 0.785

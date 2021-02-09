@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Control",
+"class": "BattleGUI",
+"language": "GDScript",
+"path": "res://GUI/BattleGUI.gd"
+}, {
 "base": "Node2D",
 "class": "Enemy",
 "language": "GDScript",
@@ -18,10 +23,17 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://Player/Player.gd"
+}, {
+"base": "Control",
+"class": "TensionBar",
+"language": "GDScript",
+"path": "res://GUI/Components/TensionBar/TensionBar.gd"
 } ]
 _global_script_class_icons={
+"BattleGUI": "",
 "Enemy": "",
-"Player": ""
+"Player": "",
+"TensionBar": ""
 }
 
 [application]

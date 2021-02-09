@@ -5,6 +5,7 @@ signal lose;
 
 onready var player: Player = $Player;
 onready var enemy: Enemy = $Enemy.get_child(0);
+onready var gui: BattleGUI = $CanvasLayer/BattleGUI;
 
 var distance: int = 0;
 var tension: int = 0;
@@ -14,6 +15,7 @@ func _ready():
 	for ability in player.abilities:
 		var curr = ability as Node2D;
 		curr.connect("move", self, "on_move");
+	gui.set_tension(0)
 	play_turn();
 	
 func play_turn():
@@ -40,4 +42,6 @@ func on_move(distance_change: int, tension_change: int):
 	print(tension_change)
 	distance += distance_change;
 	tension += tension_change;
+	gui.set_tension(tension);
+	
 	
