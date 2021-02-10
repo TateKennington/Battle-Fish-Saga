@@ -7,12 +7,14 @@ onready var tension_bar: TensionBar = $StatsPanel/TensionBar
 var selected = 0;
 
 func _ready():
+	$MovesPanel.add_move('Test');
+	$MovesPanel.add_move('Test');
 	update_indicators();
 
 func update_indicators():
 	for i in range($MovesPanel/Indicators.get_child_count()):
-		$MovesPanel/Indicators.get_child(i).get_child(0).visible = false
-	$MovesPanel/Indicators.get_child(selected).get_child(0).visible = true
+		$MovesPanel/Indicators.get_child(i).deactivate();
+	$MovesPanel/Indicators.get_child(selected).activate();
 
 func set_tension(tension: float):
 	tension_bar.set_value(tension)

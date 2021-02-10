@@ -1,0 +1,9 @@
+[gd_scene format=2]
+
+[node name="MoveLabel" type="Label"]
+margin_top = -1.0
+margin_right = 73.0
+margin_bottom = 29.0
+rect_min_size = Vector2( 0, 30 )
+text = "Test"
+valign = 1
