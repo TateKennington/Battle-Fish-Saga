@@ -11,17 +11,18 @@ var distance: int = 0;
 var tension: int = 0;
 
 func _ready():
+	gui.connect("choose_move", player, "perform_move")
 	enemy.connect("move", self, "on_move");
 	for ability in player.abilities:
 		var curr = ability as Node2D;
 		curr.connect("move", self, "on_move");
 	gui.set_tension(0)
+	gui.set_moves_list(player.get_moves_list())
 	play_turn();
 	
 func play_turn():
-	print("Player Turn")
-	player.play_turn()
-	yield(player, "turn_finished")
+	gui.activate();
+	yield(gui, "choose_move")
 	check_end();
 	print("Enemy Turn")
 	enemy.play_turn()
