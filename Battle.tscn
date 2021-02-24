@@ -13,6 +13,7 @@ script = ExtResource( 1 )
 [node name="Enemy" type="Node2D" parent="."]
 
 [node name="DonkFish" parent="Enemy" instance=ExtResource( 3 )]
+position = Vector2( 41.2004, 53.423 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
