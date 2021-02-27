@@ -10,5 +10,5 @@ func perform_move(index: int):
 func get_moves_list() -> Array:
 	var result = [];
 	for ability in abilities:
-		result.push_back(ability.get_name())
+		result.push_back(ability.get_name().to_lower())
 	return result;
