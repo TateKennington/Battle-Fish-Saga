@@ -4,7 +4,8 @@ class_name BattleGUI
 
 signal choose_move;
 
-onready var tension_bar: TensionBar = $StatsPanel/TensionBar
+onready var tension_bar: TensionBar = $StatsPanel/Tension/TensionBar
+onready var distance_bar: TensionBar = $StatsPanel/Distance/DistanceBar
 
 var selected = 0;
 	
@@ -20,6 +21,9 @@ func update_indicators():
 
 func set_tension(tension: float):
 	tension_bar.set_value(tension)
+
+func set_distance(distance: float):
+	distance_bar.set_value(distance)
 
 func _input(event):
 	if event is InputEventKey && event.is_pressed():

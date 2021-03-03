@@ -17,6 +17,7 @@ func _ready():
 		var curr = ability as Node2D;
 		curr.connect("move", self, "on_move");
 	gui.set_tension(0)
+	gui.set_distance(0)
 	gui.set_moves_list(player.get_moves_list())
 	play_turn();
 	
@@ -44,5 +45,6 @@ func on_move(distance_change: int, tension_change: int):
 	distance += distance_change;
 	tension += tension_change;
 	gui.set_tension(tension);
+	gui.set_distance(distance);
 	
 	
