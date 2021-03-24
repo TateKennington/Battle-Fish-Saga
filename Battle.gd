@@ -13,9 +13,7 @@ var tension: int = 0;
 func _ready():
 	gui.connect("choose_move", player, "perform_move")
 	enemy.connect("move", self, "on_move");
-	for ability in player.abilities:
-		var curr = ability as Node2D;
-		curr.connect("move", self, "on_move");
+	player.connect_abilities(self)
 	gui.set_tension(0)
 	gui.set_distance(0)
 	gui.set_moves_list(player.get_moves_list())
