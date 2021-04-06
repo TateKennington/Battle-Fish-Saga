@@ -4,7 +4,7 @@ signal win;
 signal lose;
 
 onready var player: Player = $Player;
-onready var enemy: Enemy = $Enemy.get_child(0);
+onready var enemy: Enemy = $ViewportContainer/Viewport/Enemy.get_child(0);
 onready var gui: BattleGUI = $CanvasLayer/BattleGUI;
 
 var distance: int = 0;
