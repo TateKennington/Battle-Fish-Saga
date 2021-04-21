@@ -40,7 +40,7 @@ gui_snap_controls_to_pixels = false
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ViewportContainer/Viewport/ParallaxBackground"]
 motion_scale = Vector2( 0.5, 1 )
-motion_mirroring = Vector2( 512, 300 )
+motion_mirroring = Vector2( 512, 0 )
 
 [node name="Sprite" type="Sprite" parent="ViewportContainer/Viewport/ParallaxBackground/ParallaxLayer"]
 texture = ExtResource( 5 )
@@ -48,14 +48,14 @@ centered = false
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="ViewportContainer/Viewport/ParallaxBackground"]
 motion_scale = Vector2( 0.6, 1 )
-motion_mirroring = Vector2( 512, 300 )
+motion_mirroring = Vector2( 512, 0 )
 
 [node name="Sprite" type="Sprite" parent="ViewportContainer/Viewport/ParallaxBackground/ParallaxLayer3"]
 texture = ExtResource( 7 )
 centered = false
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ViewportContainer/Viewport/ParallaxBackground"]
-motion_mirroring = Vector2( 512, 300 )
+motion_mirroring = Vector2( 512, 0 )
 
 [node name="Sprite" type="Sprite" parent="ViewportContainer/Viewport/ParallaxBackground/ParallaxLayer2"]
 texture = ExtResource( 6 )
@@ -64,7 +64,9 @@ centered = false
 [node name="Enemy" type="Node2D" parent="ViewportContainer/Viewport"]
 
 [node name="DonkFish" parent="ViewportContainer/Viewport/Enemy" instance=ExtResource( 3 )]
-position = Vector2( 100, 120 )
+position = Vector2( 0, 200 )
 
 [node name="Camera2D" type="Camera2D" parent="ViewportContainer/Viewport/Enemy/DonkFish"]
 current = true
+limit_top = 0
+limit_bottom = 300

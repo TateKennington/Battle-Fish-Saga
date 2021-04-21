@@ -73,7 +73,6 @@ func _input(event):
 				change_menu("basics")
 				return
 			emit_signal("choose_move", current_menu, selected);
-			deactivate();
 		selected = clamp(selected, 0, $MovesPanel/Indicators.get_child_count()-1)
 		if selected < top:
 			top = selected
