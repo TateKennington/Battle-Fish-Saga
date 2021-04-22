@@ -72,6 +72,7 @@ func _input(event):
 			if moves_list[current_menu][selected] == "back":
 				change_menu("basics")
 				return
+			deactivate();
 			emit_signal("choose_move", current_menu, selected);
 		selected = clamp(selected, 0, $MovesPanel/Indicators.get_child_count()-1)
 		if selected < top:
@@ -82,8 +83,8 @@ func _input(event):
 
 func activate():
 	set_process_input(true);
-	visible = true
+	$MovesPanel.visible = true;
 
 func deactivate():
 	set_process_input(false);
-	visible = false
+	$MovesPanel.visible = false;

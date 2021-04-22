@@ -35,7 +35,7 @@ func check_end():
 	if tension >= 100:
 		emit_signal("lose")
 		print("You lose")
-		get_tree().quit()
+		#get_tree().quit()
 
 func on_move(distance_change: float, tension_change: float):
 	print(distance_change)
@@ -44,7 +44,6 @@ func on_move(distance_change: float, tension_change: float):
 	tension += tension_change;
 	gui.set_tension(tension);
 	gui.set_distance(distance);
-	enemy.position.x = distance/100 * 300;
-	enemy.position.y = 200 - 2*max(distance, 0);
+	#enemy.move(distance_change)
 	
 	

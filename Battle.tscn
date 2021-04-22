@@ -64,7 +64,7 @@ centered = false
 [node name="Enemy" type="Node2D" parent="ViewportContainer/Viewport"]
 
 [node name="DonkFish" parent="ViewportContainer/Viewport/Enemy" instance=ExtResource( 3 )]
-position = Vector2( 0, 200 )
+position = Vector2( 0, 100 )
 
 [node name="Camera2D" type="Camera2D" parent="ViewportContainer/Viewport/Enemy/DonkFish"]
 current = true
