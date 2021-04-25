@@ -18,6 +18,18 @@ func get_moves_list() -> Dictionary:
 		result["specials"].push_back(special.get_name().to_lower())
 	return result;
 
+func get_animations_list() -> Array:
+	var result = [];
+	for basic in abilities.get_node("basics").get_children():
+		if 'fish_animation' in basic:
+			result.push_back({
+				'name': basic.get_name().to_lower(),
+				'fish': basic.fish_animation,
+			})
+	#for special in abilities.get_node("specials").get_children():
+	#	result["specials"].push_back(special.get_name().to_lower())
+	return result;
+
 func connect_abilities(reciever: Object):
 	for basic in abilities.get_node("basics").get_children():
 		basic.connect('move', reciever, 'on_move')

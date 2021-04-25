@@ -1,6 +1,6 @@
 extends Node
 
-signal move(distance_change, tension_change);
+signal move(distance_change, tension_change, move_name);
 
 func ability():
 	print("Ability not implemented")

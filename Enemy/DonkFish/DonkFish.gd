@@ -1,9 +1,8 @@
 extends "res://Enemy/Enemy.gd"
 
-signal move(distance_change, tension_change)
+signal move(distance_change, tension_change, move_name)
 
 func play_turn():
-	emit_signal("move", -10, 0)
-	animPlayer.play("donk")
-	yield(animPlayer, 'animation_finished')
+	emit_signal("move", -10, 0, 'donk')
+	yield(anim_player, 'animation_finished')
 	.play_turn();

@@ -7,14 +7,21 @@ signal animation_finished;
 
 onready var sprite: Sprite = $Sprite;
 onready var tween:Tween = $Tween;
-onready var animPlayer:AnimationPlayer = $AnimationPlayer;
+onready var anim_player:AnimationPlayer = $AnimationPlayer;
 
 func play_turn():
 	yield(get_tree().create_timer(0.1), "timeout")
 	emit_signal("turn_finished")
 
+func add_animation(name: String, animation: Animation):
+	anim_player.add_animation(name, animation);
+
+func play_animation(name: String):
+	anim_player.play(name)
+
 func move(distance_change: float, time = 0.1):
-	var newX = position.x - distance_change/100 * 1000;
+	print(distance_change)
+	var newX = position.x + distance_change/100 * 1000;
 	var newY = position.y;
 	#sprite.flip_h = newX < position.x
 	tween.interpolate_property(
