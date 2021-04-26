@@ -9,6 +9,7 @@ onready var gui: BattleGUI = $CanvasLayer/BattleGUI;
 
 var distance: float = 0;
 var tension: float = 0;
+var time: float = 0;
 
 func _ready():
 	gui.connect("choose_move", player, "perform_move")
@@ -51,3 +52,7 @@ func on_move(distance_change: float, tension_change: float, move_name: String):
 	gui.set_distance(distance);
 	
 	enemy.play_animation(move_name)
+	
+func _process(delta: float):
+	time += delta
+	$Foreground.global_position.y = 2*sin(2*time)

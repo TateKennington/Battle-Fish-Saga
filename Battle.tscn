@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Battle.gd" type="Script" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
@@ -8,6 +8,11 @@
 [ext_resource path="res://Background/OceanBackground-Close.png" type="Texture" id=6]
 [ext_resource path="res://Background/OceanBackground-Fish.png" type="Texture" id=7]
 [ext_resource path="res://Background/Battle/Background.png" type="Texture" id=8]
+[ext_resource path="res://Background/Battle/Foreground.png" type="Texture" id=9]
+[ext_resource path="res://WarbleShader.tres" type="Shader" id=10]
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 10 )
 
 [node name="Battle" type="Node2D"]
 script = ExtResource( 1 )
@@ -21,9 +26,12 @@ texture = ExtResource( 8 )
 centered = false
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 417, 117.924 )
+position = Vector2( 416, 117.924 )
 
 [node name="Foreground" type="Sprite" parent="."]
+position = Vector2( 0, 2.89793 )
+texture = ExtResource( 9 )
+centered = false
 
 [node name="ViewportContainer" type="ViewportContainer" parent="."]
 margin_left = 24.0
@@ -50,6 +58,7 @@ motion_scale = Vector2( 0.5, 1 )
 motion_mirroring = Vector2( 512, 0 )
 
 [node name="Sprite" type="Sprite" parent="ViewportContainer/Viewport/ParallaxBackground/ParallaxLayer"]
+material = SubResource( 3 )
 texture = ExtResource( 5 )
 centered = false
 
@@ -71,7 +80,7 @@ centered = false
 [node name="Enemy" type="Node2D" parent="ViewportContainer/Viewport"]
 
 [node name="DonkFish" parent="ViewportContainer/Viewport/Enemy" instance=ExtResource( 3 )]
-position = Vector2( 0, 100 )
+position = Vector2( 0, 200 )
 
 [node name="Camera2D" type="Camera2D" parent="ViewportContainer/Viewport/Enemy/DonkFish"]
 current = true
