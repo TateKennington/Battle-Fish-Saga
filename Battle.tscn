@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Battle.gd" type="Script" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
@@ -11,9 +11,19 @@
 [ext_resource path="res://Background/Battle/Foreground.png" type="Texture" id=9]
 [ext_resource path="res://WarbleShader.tres" type="Shader" id=10]
 [ext_resource path="res://Background/Battle/clouds.png" type="Texture" id=11]
+[ext_resource path="res://Background/OceanBackground-Seaweed.png" type="Texture" id=12]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 10 )
+shader_param/Frequency = 2.0
+shader_param/Repeat = 0.5
+shader_param/Displacement = 0.2
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 10 )
+shader_param/Frequency = 1.0
+shader_param/Repeat = 1.0
+shader_param/Displacement = 0.1
 
 [node name="Battle" type="Node2D"]
 script = ExtResource( 1 )
@@ -87,6 +97,11 @@ motion_mirroring = Vector2( 512, 0 )
 
 [node name="Sprite" type="Sprite" parent="ViewportContainer/Viewport/ParallaxBackground/ParallaxLayer2"]
 texture = ExtResource( 6 )
+centered = false
+
+[node name="Sprite2" type="Sprite" parent="ViewportContainer/Viewport/ParallaxBackground/ParallaxLayer2"]
+material = SubResource( 2 )
+texture = ExtResource( 12 )
 centered = false
 
 [node name="Enemy" type="Node2D" parent="ViewportContainer/Viewport"]

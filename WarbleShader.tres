@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=20 format=2]
+[gd_resource type="VisualShader" load_steps=23 format=2]
 
 [sub_resource type="VisualShaderNodeScalarFunc" id=1]
 function = 0
@@ -18,7 +18,7 @@ default_input_values = [ 0, 0.0, 1, 10.0 ]
 operator = 2
 
 [sub_resource type="VisualShaderNodeScalarOp" id=7]
-default_input_values = [ 0, 0.0, 1, 2.0 ]
+default_input_values = [ 0, 0.0, 1, 1.0 ]
 operator = 2
 
 [sub_resource type="VisualShaderNodeScalarOp" id=8]
@@ -49,6 +49,15 @@ output_port_for_preview = 0
 default_input_values = [ 0, 0.0, 1, 2.0 ]
 operator = 5
 
+[sub_resource type="VisualShaderNodeScalarUniform" id=20]
+uniform_name = "Repeat"
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=21]
+uniform_name = "Displacement"
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=22]
+uniform_name = "Frequency"
+
 [sub_resource type="VisualShaderNodeInput" id=15]
 input_name = "texture"
 
@@ -66,6 +75,9 @@ input_name = "time"
 
 [resource]
 code = "shader_type canvas_item;
+uniform float Frequency;
+uniform float Repeat;
+uniform float Displacement;
 
 
 
@@ -90,9 +102,11 @@ void fragment() {
 // Input:9
 	float n_out9p0 = TIME;
 
+// ScalarUniform:26
+	float n_out26p0 = Frequency;
+
 // ScalarOp:16
-	float n_in16p1 = 2.00000;
-	float n_out16p0 = n_out9p0 * n_in16p1;
+	float n_out16p0 = n_out9p0 * n_out26p0;
 
 // ScalarOp:13
 	float n_out13p0 = n_out15p0 + n_out16p0;
@@ -104,9 +118,11 @@ void fragment() {
 	float n_in19p0 = 1.00000;
 	float n_out19p0 = n_in19p0 - n_out12p1;
 
+// ScalarUniform:24
+	float n_out24p0 = Repeat;
+
 // ScalarOp:18
-	float n_in18p1 = 0.50000;
-	float n_out18p0 = mod(n_out19p0, n_in18p1);
+	float n_out18p0 = mod(n_out19p0, n_out24p0);
 
 // ScalarOp:17
 	float n_in17p1 = 10.00000;
@@ -115,9 +131,11 @@ void fragment() {
 // ScalarOp:14
 	float n_out14p0 = n_out10p0 * n_out17p0;
 
+// ScalarUniform:25
+	float n_out25p0 = Displacement;
+
 // ScalarOp:20
-	float n_in20p1 = 0.20000;
-	float n_out20p0 = n_out14p0 * n_in20p1;
+	float n_out20p0 = n_out14p0 * n_out25p0;
 
 // VectorCompose:11
 	float n_in11p1 = 0.00000;
@@ -177,6 +195,7 @@ void fragment() {
 
 // Output:0
 	COLOR.rgb = n_out21p0;
+	COLOR.a = n_out5p1;
 
 }
 
@@ -186,18 +205,18 @@ void light() {
 }
 "
 custom_defines = ""
-graph_offset = Vector2( -387.832, -357.2 )
+graph_offset = Vector2( -1258.79, 178 )
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2( 460, -100 )
+nodes/fragment/0/position = Vector2( 580, -100 )
 nodes/fragment/4/node = SubResource( 15 )
 nodes/fragment/4/position = Vector2( -80, -60 )
 nodes/fragment/5/node = SubResource( 16 )
 nodes/fragment/5/position = Vector2( 160, -140 )
 nodes/fragment/6/node = SubResource( 17 )
-nodes/fragment/6/position = Vector2( -940, -100 )
+nodes/fragment/6/position = Vector2( -1200, -140 )
 nodes/fragment/7/node = SubResource( 18 )
-nodes/fragment/7/position = Vector2( -580, -140 )
+nodes/fragment/7/position = Vector2( -840, -240 )
 nodes/fragment/9/node = SubResource( 19 )
 nodes/fragment/9/position = Vector2( -1340, 320 )
 nodes/fragment/10/node = SubResource( 1 )
@@ -228,4 +247,10 @@ nodes/fragment/22/node = SubResource( 13 )
 nodes/fragment/22/position = Vector2( -120, -340 )
 nodes/fragment/23/node = SubResource( 14 )
 nodes/fragment/23/position = Vector2( -460, -320 )
-nodes/fragment/connections = PoolIntArray( 4, 0, 5, 2, 6, 0, 7, 0, 7, 0, 5, 0, 11, 0, 7, 1, 6, 0, 12, 0, 13, 0, 10, 0, 10, 0, 14, 0, 12, 1, 15, 0, 15, 0, 13, 0, 9, 0, 16, 0, 16, 0, 13, 1, 17, 0, 14, 1, 18, 0, 17, 0, 12, 1, 19, 1, 19, 0, 18, 0, 14, 0, 20, 0, 20, 0, 11, 0, 5, 0, 21, 0, 21, 0, 0, 0, 22, 0, 21, 1, 19, 0, 23, 0, 23, 0, 22, 0, 23, 0, 22, 1, 23, 0, 22, 2 )
+nodes/fragment/24/node = SubResource( 20 )
+nodes/fragment/24/position = Vector2( -1400, 80 )
+nodes/fragment/25/node = SubResource( 21 )
+nodes/fragment/25/position = Vector2( -180, 460 )
+nodes/fragment/26/node = SubResource( 22 )
+nodes/fragment/26/position = Vector2( -1340, 460 )
+nodes/fragment/connections = PoolIntArray( 4, 0, 5, 2, 6, 0, 7, 0, 7, 0, 5, 0, 11, 0, 7, 1, 6, 0, 12, 0, 13, 0, 10, 0, 10, 0, 14, 0, 12, 1, 15, 0, 15, 0, 13, 0, 9, 0, 16, 0, 16, 0, 13, 1, 17, 0, 14, 1, 18, 0, 17, 0, 12, 1, 19, 1, 19, 0, 18, 0, 14, 0, 20, 0, 20, 0, 11, 0, 5, 0, 21, 0, 22, 0, 21, 1, 19, 0, 23, 0, 23, 0, 22, 0, 23, 0, 22, 1, 23, 0, 22, 2, 21, 0, 0, 0, 5, 1, 0, 1, 24, 0, 18, 1, 25, 0, 20, 1, 26, 0, 16, 1 )
