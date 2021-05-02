@@ -58,3 +58,5 @@ func _process(delta: float):
 	$Foreground.global_position.y = 2*sin(2*time)
 	$Player.global_position.y = 117.924 + 2*sin(2*time)
 	$ParallaxBackground/ParallaxLayer.motion_offset.x -= 0.2
+	$ViewportContainer/Viewport/ParallaxBackground/ParallaxLayer3.motion_offset.x -= 0.2
+	$ViewportContainer/Viewport/ParallaxBackground/ParallaxLayer4.motion_offset.x += 0.2

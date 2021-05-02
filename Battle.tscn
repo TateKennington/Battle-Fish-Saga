@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Battle.gd" type="Script" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
@@ -6,12 +6,13 @@
 [ext_resource path="res://GUI/BattleGUI.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Background/OceanBackground-Far.png" type="Texture" id=5]
 [ext_resource path="res://Background/OceanBackground-Close.png" type="Texture" id=6]
-[ext_resource path="res://Background/OceanBackground-Fish.png" type="Texture" id=7]
+[ext_resource path="res://Background/OceanBackground-Fish-Left.png" type="Texture" id=7]
 [ext_resource path="res://Background/Battle/Background.png" type="Texture" id=8]
 [ext_resource path="res://Background/Battle/Foreground.png" type="Texture" id=9]
 [ext_resource path="res://WarbleShader.tres" type="Shader" id=10]
 [ext_resource path="res://Background/Battle/clouds.png" type="Texture" id=11]
 [ext_resource path="res://Background/OceanBackground-Seaweed.png" type="Texture" id=12]
+[ext_resource path="res://Background/OceanBackground-Fish-Right.png" type="Texture" id=13]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 10 )
@@ -94,6 +95,14 @@ motion_mirroring = Vector2( 512, 0 )
 
 [node name="Sprite" type="Sprite" parent="ViewportContainer/Viewport/ParallaxBackground/ParallaxLayer3"]
 texture = ExtResource( 7 )
+centered = false
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ViewportContainer/Viewport/ParallaxBackground"]
+motion_scale = Vector2( 0.6, 1 )
+motion_mirroring = Vector2( 512, 0 )
+
+[node name="Sprite" type="Sprite" parent="ViewportContainer/Viewport/ParallaxBackground/ParallaxLayer4"]
+texture = ExtResource( 13 )
 centered = false
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ViewportContainer/Viewport/ParallaxBackground"]
