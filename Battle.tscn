@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Battle.gd" type="Script" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
@@ -10,20 +10,32 @@
 [ext_resource path="res://Background/Battle/Background.png" type="Texture" id=8]
 [ext_resource path="res://Background/Battle/Foreground.png" type="Texture" id=9]
 [ext_resource path="res://WarbleShader.tres" type="Shader" id=10]
+[ext_resource path="res://Background/Battle/clouds.png" type="Texture" id=11]
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 10 )
 
 [node name="Battle" type="Node2D"]
 script = ExtResource( 1 )
 
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Background" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+texture = ExtResource( 8 )
+centered = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 512, 0 )
+
+[node name="Clouds" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource( 11 )
+centered = false
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="BattleGUI" parent="CanvasLayer" instance=ExtResource( 4 )]
-
-[node name="Background" type="Sprite" parent="."]
-texture = ExtResource( 8 )
-centered = false
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 416, 117.924 )
@@ -58,7 +70,7 @@ motion_scale = Vector2( 0.5, 1 )
 motion_mirroring = Vector2( 512, 0 )
 
 [node name="Sprite" type="Sprite" parent="ViewportContainer/Viewport/ParallaxBackground/ParallaxLayer"]
-material = SubResource( 3 )
+material = SubResource( 1 )
 texture = ExtResource( 5 )
 centered = false
 

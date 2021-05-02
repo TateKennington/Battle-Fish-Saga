@@ -56,3 +56,5 @@ func on_move(distance_change: float, tension_change: float, move_name: String):
 func _process(delta: float):
 	time += delta
 	$Foreground.global_position.y = 2*sin(2*time)
+	$Player.global_position.y = 117.924 + 2*sin(2*time)
+	$ParallaxBackground/ParallaxLayer.motion_offset.x -= 0.2
