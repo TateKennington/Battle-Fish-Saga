@@ -16,13 +16,17 @@
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 10 )
 shader_param/Frequency = 2.0
+shader_param/X_Modifier = null
 shader_param/Repeat = 0.5
+shader_param/HeightModifier = 10.0
 shader_param/Displacement = 0.2
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 10 )
 shader_param/Frequency = 1.0
+shader_param/X_Modifier = 15.0
 shader_param/Repeat = 1.0
+shader_param/HeightModifier = 6.0
 shader_param/Displacement = 0.1
 
 [node name="Battle" type="Node2D"]
