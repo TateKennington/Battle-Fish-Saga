@@ -1,18 +1,14 @@
 extends Panel
 
-onready var indicator = preload("res://GUI/Components/Indicator/Indicator.tscn");
-onready var move_label = preload("res://GUI/Components/MoveLabel/MoveLabel.tscn");
+onready var move_label = preload("res://GUI/Components/MenuItem/MenuItem.tscn");
 
 func add_move(name:String):
-	var new_label: Label = move_label.instance();
+	var new_label: MenuItem = move_label.instance();
+	$Items.add_child(new_label);
 	new_label.text = name;
-	$MoveLabels.add_child(new_label);
-	$Indicators.add_child(indicator.instance());
+	new_label.expand = false;
 
 func clear():
-	for child in $MoveLabels.get_children():
-		$MoveLabels.remove_child(child)
-		child.queue_free();
-	for child in $Indicators.get_children():
-		$Indicators.remove_child(child)
+	for child in $Items.get_children():
+		$Items.remove_child(child)
 		child.queue_free();

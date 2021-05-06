@@ -94,24 +94,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MoveLabels" type="VBoxContainer" parent="MovesPanel"]
+[node name="Items" type="VBoxContainer" parent="MovesPanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 23.0
+margin_left = 6.0
 margin_top = 6.0
 margin_right = -5.0
 margin_bottom = -5.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Indicators" type="VBoxContainer" parent="MovesPanel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 7.0
-margin_top = 4.0
-margin_right = -36.0
-margin_bottom = -6.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

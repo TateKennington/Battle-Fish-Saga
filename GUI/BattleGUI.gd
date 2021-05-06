@@ -35,22 +35,16 @@ func update_menu():
 	update_indicators();
 	
 func update_indicators():
-	for i in range($MovesPanel/Indicators.get_child_count()):
-		$MovesPanel/Indicators.get_child(i).visible = false;
-		$MovesPanel/Indicators.get_child(i).deactivate();
-	for i in range($MovesPanel/MoveLabels.get_child_count()):
-		$MovesPanel/MoveLabels.get_child(i).visible = false;
+	for i in range($MovesPanel/Items.get_child_count()):
+		$MovesPanel/Items.get_child(i).deactivate();
+		$MovesPanel/Items.get_child(i).visible = false;
 		
 	for i in range(top, top+window_size):
-		if i >= $MovesPanel/Indicators.get_child_count():
+		if i >= $MovesPanel/Items.get_child_count():
 			break;
-		$MovesPanel/Indicators.get_child(i).visible = true;
-	for i in range(top, top+window_size):
-		if i >= $MovesPanel/MoveLabels.get_child_count():
-			break;
-		$MovesPanel/MoveLabels.get_child(i).visible = true;
+		$MovesPanel/Items.get_child(i).visible = true;
 		
-	$MovesPanel/Indicators.get_child(selected).activate();
+	$MovesPanel/Items.get_child(selected).activate();
 
 func set_tension(tension: float):
 	tension_bar.set_value(tension)
@@ -74,7 +68,7 @@ func _input(event):
 				return
 			deactivate();
 			emit_signal("choose_move", current_menu, selected);
-		selected = clamp(selected, 0, $MovesPanel/Indicators.get_child_count()-1)
+		selected = clamp(selected, 0, $MovesPanel/Items.get_child_count()-1)
 		if selected < top:
 			top = selected
 		if selected >= top + window_size:
