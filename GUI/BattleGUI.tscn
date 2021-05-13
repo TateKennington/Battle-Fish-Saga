@@ -3,7 +3,7 @@
 [ext_resource path="res://GUI/Components/TensionBar/TensionBar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://font.tres" type="BitmapFont" id=2]
 [ext_resource path="res://GUI/BattleGUI.gd" type="Script" id=3]
-[ext_resource path="res://GUI/MovesPanel.gd" type="Script" id=4]
+[ext_resource path="res://GUI/Components/Menu/Menu.tscn" type="PackedScene" id=4]
 [ext_resource path="res://GUI/Dashboard.png" type="Texture" id=5]
 
 [node name="BattleGUI" type="Control"]
@@ -80,27 +80,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MovesPanel" type="Panel" parent="."]
-anchor_left = 0.785
+[node name="Menu" parent="." instance=ExtResource( 4 )]
+anchor_left = 0.777
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -1.92001
+margin_left = 0.175995
 margin_top = -72.0
-margin_right = -7.0
+margin_right = -10.0
 margin_bottom = -8.0
-script = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Items" type="VBoxContainer" parent="MovesPanel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 6.0
-margin_top = 6.0
-margin_right = -5.0
-margin_bottom = -5.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[connection signal="selected" from="Menu" to="." method="select_move"]
