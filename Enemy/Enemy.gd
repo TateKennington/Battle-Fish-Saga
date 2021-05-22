@@ -17,7 +17,8 @@ func add_animation(name: String, animation: Animation):
 	anim_player.add_animation(name, animation);
 
 func play_animation(name: String):
-	anim_player.play(name)
+	if anim_player.has_animation(name):
+		anim_player.play(name)
 
 func move(distance_change: float, time = 0.1):
 	print(distance_change)

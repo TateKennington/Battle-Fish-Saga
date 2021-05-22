@@ -28,8 +28,6 @@ func play_turn():
 	yield(gui, "choose_move")
 	check_end();
 	yield(get_tree().create_timer(1), 'timeout')
-	print("Enemy Turn")
-	#yield(enemy, "animation_finished")
 	enemy.play_turn()
 	yield(enemy, "turn_finished")
 	check_end();
@@ -38,10 +36,10 @@ func play_turn():
 func check_end():
 	if distance >= 100:
 		emit_signal("win")
-	if tension >= 100:
+		SceneManager.load_mainmenu();
+	if tension >= 100 || distance <= -100:
 		emit_signal("lose")
-		print("You lose")
-		#get_tree().quit()
+		SceneManager.load_mainmenu();
 
 func on_move(distance_change: float, tension_change: float, move_name: String):
 	print(distance_change)
