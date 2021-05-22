@@ -46,9 +46,9 @@ func select_move(index: int):
 	emit_signal("choose_move", current_menu, index);
 
 func activate():
-	set_process_input(true);
+	menu.set_process_input(true);
 	menu.visible = true;
 
 func deactivate():
-	set_process_input(false);
+	menu.set_process_input(false);
 	menu.visible = false;
