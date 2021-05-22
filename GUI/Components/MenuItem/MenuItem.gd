@@ -27,3 +27,9 @@ func activate():
 	
 func deactivate():
 	indicator.hide();
+	
+func hide():
+	visible = false;
+
+func show():
+	visible = true;

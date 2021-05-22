@@ -1,3 +1,4 @@
+tool
 extends Control
 
 class_name BattleGUI
@@ -6,6 +7,7 @@ signal choose_move;
 
 onready var tension_bar: TensionBar = $StatsPanel/Tension/TensionBar
 onready var distance_bar: TensionBar = $StatsPanel/Distance/DistanceBar
+onready var menu: Menu = $Panel/CenterContainer/Menu
 
 var moves_list;
 var current_menu;
@@ -22,10 +24,10 @@ func set_moves_list(moves: Dictionary):
 	update_menu();
 
 func update_menu():
-	$Menu.clear();
+	menu.clear();
 	for move in moves_list[current_menu]:
 		print(move)
-		$Menu.add_move(move)
+		menu.add_move(move)
 
 func set_tension(tension: float):
 	tension_bar.set_value(tension)
@@ -45,8 +47,8 @@ func select_move(index: int):
 
 func activate():
 	set_process_input(true);
-	$Menu.visible = true;
+	menu.visible = true;
 
 func deactivate():
 	set_process_input(false);
-	$Menu.visible = false;
+	menu.visible = false;

@@ -80,13 +80,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Menu" parent="." instance=ExtResource( 4 )]
-anchor_left = 0.777
+[node name="Panel" type="Panel" parent="."]
+anchor_left = 0.778
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 0.175995
 margin_top = -72.0
 margin_right = -10.0
 margin_bottom = -8.0
-[connection signal="selected" from="Menu" to="." method="select_move"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Menu" parent="Panel/CenterContainer" instance=ExtResource( 4 )]
+margin_left = 51.0
+margin_top = 32.0
+margin_right = 51.0
+margin_bottom = 32.0
+[connection signal="selected" from="Panel/CenterContainer/Menu" to="." method="select_move"]

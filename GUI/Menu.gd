@@ -1,10 +1,16 @@
+tool
 extends VBoxContainer
+
+class_name Menu
 
 signal selected(index)
 
 onready var move_label = preload("res://GUI/Components/MenuItem/MenuItem.tscn");
 
+export var window: int = 3 setget set_window;
+
 var active: int = 0;
+var top: int = 0;
 
 func _ready():
 	update_items();
@@ -23,11 +29,22 @@ func _input(event):
 		print(active)
 
 func update_items():
+	if active < top:
+		top = active;
+	if top + window <= active:
+		top = active - window + 1;
+	if get_child_count() == 0:
+		return;
 	var items: Array = get_children();
 	if items.empty():
 		return;
-	for item in items:
+	for index in range(items.size()):
+		var item = items[index];
 		item.deactivate();
+		if index < top || index >= top + window:
+			item.hide();
+		else:
+			item.show();
 	items[active].activate();
 
 func add_move(name:String, expand = false):
@@ -42,3 +59,7 @@ func clear():
 	for item in get_children():
 		remove_child(item)
 		item.queue_free();
+
+func set_window(new_window:int):
+	window = new_window;
+	update_items();
