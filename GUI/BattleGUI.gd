@@ -7,6 +7,7 @@ signal choose_move;
 
 onready var tension_bar: TensionBar = $StatsPanel/Tension/TensionBar
 onready var distance_bar: TensionBar = $StatsPanel/Distance/DistanceBar
+onready var special_bar = $StatsPanel/Special/SpecialBar
 onready var menu: Menu = $Panel/CenterContainer/Menu
 
 var moves_list;
@@ -52,3 +53,6 @@ func activate():
 func deactivate():
 	menu.set_process_input(false);
 	menu.visible = false;
+
+func push_special(special:int):
+	special_bar.push_special(special)

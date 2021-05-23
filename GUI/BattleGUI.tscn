@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://GUI/Components/TensionBar/TensionBar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://font.tres" type="BitmapFont" id=2]
 [ext_resource path="res://GUI/BattleGUI.gd" type="Script" id=3]
 [ext_resource path="res://GUI/Components/Menu/Menu.tscn" type="PackedScene" id=4]
 [ext_resource path="res://GUI/Dashboard.png" type="Texture" id=5]
+[ext_resource path="res://GUI/Components/SpecialBar/SpecialBar.tscn" type="PackedScene" id=6]
 
 [node name="BattleGUI" type="Control"]
 anchor_right = 1.0
@@ -79,6 +80,30 @@ text = "distance"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Special" type="Control" parent="StatsPanel"]
+anchor_right = 1.0
+margin_top = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="StatsPanel/Special"]
+margin_left = 7.0
+margin_top = 8.0
+margin_right = 49.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 2 )
+text = "special"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpecialBar" parent="StatsPanel/Special" instance=ExtResource( 6 )]
+margin_left = 67.8391
+margin_top = 5.93298
+margin_right = 367.839
+margin_bottom = 17.933
 
 [node name="Panel" type="Panel" parent="."]
 anchor_left = 0.778

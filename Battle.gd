@@ -27,6 +27,10 @@ func play_turn():
 	gui.activate();
 	yield(gui, "choose_move")
 	check_end();
+	if tension >= 0 :
+		gui.push_special(Special_Counter.State.Tense)
+	else:
+		gui.push_special(Special_Counter.State.Slack)
 	yield(get_tree().create_timer(1), 'timeout')
 	enemy.play_turn()
 	yield(enemy, "turn_finished")
