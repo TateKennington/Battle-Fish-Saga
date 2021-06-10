@@ -1,7 +1,1982 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://GUI/Components/SpecialBar/SpecialBar.gd" type="Script" id=1]
 [ext_resource path="res://GUI/Components/SpecialCounter/SpecialCounter.tscn" type="PackedScene" id=2]
+
+[sub_resource type="VisualShaderNodeScalarFunc" id=1]
+function = 12
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=13]
+uniform_name = "AnimationMultiplier"
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=14]
+uniform_name = "AnimationSpeed"
+
+[sub_resource type="VisualShaderNodeScalarOp" id=15]
+operator = 2
+
+[sub_resource type="VisualShaderNodeColorOp" id=3]
+default_input_values = [ 0, Vector3( 0, 0, 0 ), 1, Vector3( 0.1, 0.1, 0.1 ) ]
+
+[sub_resource type="VisualShaderNodeInput" id=4]
+input_name = "texture"
+
+[sub_resource type="VisualShaderNodeInput" id=5]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeTexture" id=6]
+source = 2
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeInput" id=7]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeVectorCompose" id=8]
+
+[sub_resource type="VisualShaderNodeScalarFunc" id=9]
+function = 0
+
+[sub_resource type="VisualShaderNodeScalarOp" id=10]
+default_input_values = [ 0, 0.0, 1, 1.0 ]
+operator = 2
+
+[sub_resource type="VisualShader" id=16]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+uniform float AnimationSpeed;
+uniform float AnimationMultiplier;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:6
+	float n_out6p0 = TIME;
+
+// ScalarUniform:12
+	float n_out12p0 = AnimationSpeed;
+
+// ScalarOp:13
+	float n_out13p0 = n_out6p0 * n_out12p0;
+
+// ScalarFunc:8
+	float n_out8p0 = sin(n_out13p0);
+
+// ScalarUniform:11
+	float n_out11p0 = AnimationMultiplier;
+
+// ScalarOp:9
+	float n_out9p0 = n_out8p0 * n_out11p0;
+
+// ScalarFunc:10
+	float n_out10p0 = abs(n_out9p0);
+
+// VectorCompose:7
+	vec3 n_out7p0 = vec3(n_out10p0, n_out10p0, n_out10p0);
+
+// Input:4
+	vec3 n_out4p0 = vec3(UV, 0.0);
+
+// Input:3
+
+// Texture:5
+	vec3 n_out5p0;
+	float n_out5p1;
+	{
+		vec4 _tex_read = texture(TEXTURE, n_out4p0.xy);
+		n_out5p0 = _tex_read.rgb;
+		n_out5p1 = _tex_read.a;
+	}
+
+// ColorOp:2
+	vec3 n_out2p0 = vec3(1.0) - (vec3(1.0) - n_out7p0) * (vec3(1.0) - n_out5p0);
+
+// Output:0
+	COLOR.rgb = n_out2p0;
+	COLOR.a = n_out5p1;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+custom_defines = ""
+graph_offset = Vector2( -1642.73, -75.6 )
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource( 3 )
+nodes/fragment/2/position = Vector2( 120, 0 )
+nodes/fragment/3/node = SubResource( 4 )
+nodes/fragment/3/position = Vector2( -400, 300 )
+nodes/fragment/4/node = SubResource( 5 )
+nodes/fragment/4/position = Vector2( -400, 200 )
+nodes/fragment/5/node = SubResource( 6 )
+nodes/fragment/5/position = Vector2( -120, 160 )
+nodes/fragment/6/node = SubResource( 7 )
+nodes/fragment/6/position = Vector2( -1700, 20 )
+nodes/fragment/7/node = SubResource( 8 )
+nodes/fragment/7/position = Vector2( -320, 0 )
+nodes/fragment/8/node = SubResource( 9 )
+nodes/fragment/8/position = Vector2( -1220, 20 )
+nodes/fragment/9/node = SubResource( 10 )
+nodes/fragment/9/position = Vector2( -940, 0 )
+nodes/fragment/10/node = SubResource( 1 )
+nodes/fragment/10/position = Vector2( -660, 20 )
+nodes/fragment/11/node = SubResource( 13 )
+nodes/fragment/11/position = Vector2( -1200, 120 )
+nodes/fragment/12/node = SubResource( 14 )
+nodes/fragment/12/position = Vector2( -1700, 120 )
+nodes/fragment/13/node = SubResource( 15 )
+nodes/fragment/13/position = Vector2( -1460, 0 )
+nodes/fragment/connections = PoolIntArray( 4, 0, 5, 0, 3, 0, 5, 2, 5, 1, 0, 1, 2, 0, 0, 0, 9, 0, 10, 0, 8, 0, 9, 0, 10, 0, 7, 0, 10, 0, 7, 1, 10, 0, 7, 2, 7, 0, 2, 0, 5, 0, 2, 1, 11, 0, 9, 1, 6, 0, 13, 0, 12, 0, 13, 1, 13, 0, 8, 0 )
+
+[sub_resource type="ShaderMaterial" id=17]
+resource_local_to_scene = true
+shader = SubResource( 16 )
+shader_param/AnimationSpeed = 2.0
+shader_param/AnimationMultiplier = 0.0
+
+[sub_resource type="VisualShader" id=18]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+uniform float AnimationSpeed;
+uniform float AnimationMultiplier;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:6
+	float n_out6p0 = TIME;
+
+// ScalarUniform:12
+	float n_out12p0 = AnimationSpeed;
+
+// ScalarOp:13
+	float n_out13p0 = n_out6p0 * n_out12p0;
+
+// ScalarFunc:8
+	float n_out8p0 = sin(n_out13p0);
+
+// ScalarUniform:11
+	float n_out11p0 = AnimationMultiplier;
+
+// ScalarOp:9
+	float n_out9p0 = n_out8p0 * n_out11p0;
+
+// ScalarFunc:10
+	float n_out10p0 = abs(n_out9p0);
+
+// VectorCompose:7
+	vec3 n_out7p0 = vec3(n_out10p0, n_out10p0, n_out10p0);
+
+// Input:4
+	vec3 n_out4p0 = vec3(UV, 0.0);
+
+// Input:3
+
+// Texture:5
+	vec3 n_out5p0;
+	float n_out5p1;
+	{
+		vec4 _tex_read = texture(TEXTURE, n_out4p0.xy);
+		n_out5p0 = _tex_read.rgb;
+		n_out5p1 = _tex_read.a;
+	}
+
+// ColorOp:2
+	vec3 n_out2p0 = vec3(1.0) - (vec3(1.0) - n_out7p0) * (vec3(1.0) - n_out5p0);
+
+// Output:0
+	COLOR.rgb = n_out2p0;
+	COLOR.a = n_out5p1;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+custom_defines = ""
+graph_offset = Vector2( -1642.73, -75.6 )
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource( 3 )
+nodes/fragment/2/position = Vector2( 120, 0 )
+nodes/fragment/3/node = SubResource( 4 )
+nodes/fragment/3/position = Vector2( -400, 300 )
+nodes/fragment/4/node = SubResource( 5 )
+nodes/fragment/4/position = Vector2( -400, 200 )
+nodes/fragment/5/node = SubResource( 6 )
+nodes/fragment/5/position = Vector2( -120, 160 )
+nodes/fragment/6/node = SubResource( 7 )
+nodes/fragment/6/position = Vector2( -1700, 20 )
+nodes/fragment/7/node = SubResource( 8 )
+nodes/fragment/7/position = Vector2( -320, 0 )
+nodes/fragment/8/node = SubResource( 9 )
+nodes/fragment/8/position = Vector2( -1220, 20 )
+nodes/fragment/9/node = SubResource( 10 )
+nodes/fragment/9/position = Vector2( -940, 0 )
+nodes/fragment/10/node = SubResource( 1 )
+nodes/fragment/10/position = Vector2( -660, 20 )
+nodes/fragment/11/node = SubResource( 13 )
+nodes/fragment/11/position = Vector2( -1200, 120 )
+nodes/fragment/12/node = SubResource( 14 )
+nodes/fragment/12/position = Vector2( -1700, 120 )
+nodes/fragment/13/node = SubResource( 15 )
+nodes/fragment/13/position = Vector2( -1460, 0 )
+nodes/fragment/connections = PoolIntArray( 4, 0, 5, 0, 3, 0, 5, 2, 5, 1, 0, 1, 2, 0, 0, 0, 9, 0, 10, 0, 8, 0, 9, 0, 10, 0, 7, 0, 10, 0, 7, 1, 10, 0, 7, 2, 7, 0, 2, 0, 5, 0, 2, 1, 11, 0, 9, 1, 6, 0, 13, 0, 12, 0, 13, 1, 13, 0, 8, 0 )
+
+[sub_resource type="ShaderMaterial" id=19]
+resource_local_to_scene = true
+shader = SubResource( 18 )
+shader_param/AnimationSpeed = 2.0
+shader_param/AnimationMultiplier = 0.0
+
+[sub_resource type="VisualShader" id=20]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+uniform float AnimationSpeed;
+uniform float AnimationMultiplier;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:6
+	float n_out6p0 = TIME;
+
+// ScalarUniform:12
+	float n_out12p0 = AnimationSpeed;
+
+// ScalarOp:13
+	float n_out13p0 = n_out6p0 * n_out12p0;
+
+// ScalarFunc:8
+	float n_out8p0 = sin(n_out13p0);
+
+// ScalarUniform:11
+	float n_out11p0 = AnimationMultiplier;
+
+// ScalarOp:9
+	float n_out9p0 = n_out8p0 * n_out11p0;
+
+// ScalarFunc:10
+	float n_out10p0 = abs(n_out9p0);
+
+// VectorCompose:7
+	vec3 n_out7p0 = vec3(n_out10p0, n_out10p0, n_out10p0);
+
+// Input:4
+	vec3 n_out4p0 = vec3(UV, 0.0);
+
+// Input:3
+
+// Texture:5
+	vec3 n_out5p0;
+	float n_out5p1;
+	{
+		vec4 _tex_read = texture(TEXTURE, n_out4p0.xy);
+		n_out5p0 = _tex_read.rgb;
+		n_out5p1 = _tex_read.a;
+	}
+
+// ColorOp:2
+	vec3 n_out2p0 = vec3(1.0) - (vec3(1.0) - n_out7p0) * (vec3(1.0) - n_out5p0);
+
+// Output:0
+	COLOR.rgb = n_out2p0;
+	COLOR.a = n_out5p1;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+custom_defines = ""
+graph_offset = Vector2( -1642.73, -75.6 )
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource( 3 )
+nodes/fragment/2/position = Vector2( 120, 0 )
+nodes/fragment/3/node = SubResource( 4 )
+nodes/fragment/3/position = Vector2( -400, 300 )
+nodes/fragment/4/node = SubResource( 5 )
+nodes/fragment/4/position = Vector2( -400, 200 )
+nodes/fragment/5/node = SubResource( 6 )
+nodes/fragment/5/position = Vector2( -120, 160 )
+nodes/fragment/6/node = SubResource( 7 )
+nodes/fragment/6/position = Vector2( -1700, 20 )
+nodes/fragment/7/node = SubResource( 8 )
+nodes/fragment/7/position = Vector2( -320, 0 )
+nodes/fragment/8/node = SubResource( 9 )
+nodes/fragment/8/position = Vector2( -1220, 20 )
+nodes/fragment/9/node = SubResource( 10 )
+nodes/fragment/9/position = Vector2( -940, 0 )
+nodes/fragment/10/node = SubResource( 1 )
+nodes/fragment/10/position = Vector2( -660, 20 )
+nodes/fragment/11/node = SubResource( 13 )
+nodes/fragment/11/position = Vector2( -1200, 120 )
+nodes/fragment/12/node = SubResource( 14 )
+nodes/fragment/12/position = Vector2( -1700, 120 )
+nodes/fragment/13/node = SubResource( 15 )
+nodes/fragment/13/position = Vector2( -1460, 0 )
+nodes/fragment/connections = PoolIntArray( 4, 0, 5, 0, 3, 0, 5, 2, 5, 1, 0, 1, 2, 0, 0, 0, 9, 0, 10, 0, 8, 0, 9, 0, 10, 0, 7, 0, 10, 0, 7, 1, 10, 0, 7, 2, 7, 0, 2, 0, 5, 0, 2, 1, 11, 0, 9, 1, 6, 0, 13, 0, 12, 0, 13, 1, 13, 0, 8, 0 )
+
+[sub_resource type="ShaderMaterial" id=21]
+resource_local_to_scene = true
+shader = SubResource( 20 )
+shader_param/AnimationSpeed = 2.0
+shader_param/AnimationMultiplier = 0.0
+
+[sub_resource type="VisualShader" id=22]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+uniform float AnimationSpeed;
+uniform float AnimationMultiplier;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:6
+	float n_out6p0 = TIME;
+
+// ScalarUniform:12
+	float n_out12p0 = AnimationSpeed;
+
+// ScalarOp:13
+	float n_out13p0 = n_out6p0 * n_out12p0;
+
+// ScalarFunc:8
+	float n_out8p0 = sin(n_out13p0);
+
+// ScalarUniform:11
+	float n_out11p0 = AnimationMultiplier;
+
+// ScalarOp:9
+	float n_out9p0 = n_out8p0 * n_out11p0;
+
+// ScalarFunc:10
+	float n_out10p0 = abs(n_out9p0);
+
+// VectorCompose:7
+	vec3 n_out7p0 = vec3(n_out10p0, n_out10p0, n_out10p0);
+
+// Input:4
+	vec3 n_out4p0 = vec3(UV, 0.0);
+
+// Input:3
+
+// Texture:5
+	vec3 n_out5p0;
+	float n_out5p1;
+	{
+		vec4 _tex_read = texture(TEXTURE, n_out4p0.xy);
+		n_out5p0 = _tex_read.rgb;
+		n_out5p1 = _tex_read.a;
+	}
+
+// ColorOp:2
+	vec3 n_out2p0 = vec3(1.0) - (vec3(1.0) - n_out7p0) * (vec3(1.0) - n_out5p0);
+
+// Output:0
+	COLOR.rgb = n_out2p0;
+	COLOR.a = n_out5p1;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+custom_defines = ""
+graph_offset = Vector2( -1642.73, -75.6 )
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource( 3 )
+nodes/fragment/2/position = Vector2( 120, 0 )
+nodes/fragment/3/node = SubResource( 4 )
+nodes/fragment/3/position = Vector2( -400, 300 )
+nodes/fragment/4/node = SubResource( 5 )
+nodes/fragment/4/position = Vector2( -400, 200 )
+nodes/fragment/5/node = SubResource( 6 )
+nodes/fragment/5/position = Vector2( -120, 160 )
+nodes/fragment/6/node = SubResource( 7 )
+nodes/fragment/6/position = Vector2( -1700, 20 )
+nodes/fragment/7/node = SubResource( 8 )
+nodes/fragment/7/position = Vector2( -320, 0 )
+nodes/fragment/8/node = SubResource( 9 )
+nodes/fragment/8/position = Vector2( -1220, 20 )
+nodes/fragment/9/node = SubResource( 10 )
+nodes/fragment/9/position = Vector2( -940, 0 )
+nodes/fragment/10/node = SubResource( 1 )
+nodes/fragment/10/position = Vector2( -660, 20 )
+nodes/fragment/11/node = SubResource( 13 )
+nodes/fragment/11/position = Vector2( -1200, 120 )
+nodes/fragment/12/node = SubResource( 14 )
+nodes/fragment/12/position = Vector2( -1700, 120 )
+nodes/fragment/13/node = SubResource( 15 )
+nodes/fragment/13/position = Vector2( -1460, 0 )
+nodes/fragment/connections = PoolIntArray( 4, 0, 5, 0, 3, 0, 5, 2, 5, 1, 0, 1, 2, 0, 0, 0, 9, 0, 10, 0, 8, 0, 9, 0, 10, 0, 7, 0, 10, 0, 7, 1, 10, 0, 7, 2, 7, 0, 2, 0, 5, 0, 2, 1, 11, 0, 9, 1, 6, 0, 13, 0, 12, 0, 13, 1, 13, 0, 8, 0 )
+
+[sub_resource type="ShaderMaterial" id=23]
+resource_local_to_scene = true
+shader = SubResource( 22 )
+shader_param/AnimationSpeed = 2.0
+shader_param/AnimationMultiplier = 0.0
+
+[sub_resource type="VisualShader" id=24]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+uniform float AnimationSpeed;
+uniform float AnimationMultiplier;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:6
+	float n_out6p0 = TIME;
+
+// ScalarUniform:12
+	float n_out12p0 = AnimationSpeed;
+
+// ScalarOp:13
+	float n_out13p0 = n_out6p0 * n_out12p0;
+
+// ScalarFunc:8
+	float n_out8p0 = sin(n_out13p0);
+
+// ScalarUniform:11
+	float n_out11p0 = AnimationMultiplier;
+
+// ScalarOp:9
+	float n_out9p0 = n_out8p0 * n_out11p0;
+
+// ScalarFunc:10
+	float n_out10p0 = abs(n_out9p0);
+
+// VectorCompose:7
+	vec3 n_out7p0 = vec3(n_out10p0, n_out10p0, n_out10p0);
+
+// Input:4
+	vec3 n_out4p0 = vec3(UV, 0.0);
+
+// Input:3
+
+// Texture:5
+	vec3 n_out5p0;
+	float n_out5p1;
+	{
+		vec4 _tex_read = texture(TEXTURE, n_out4p0.xy);
+		n_out5p0 = _tex_read.rgb;
+		n_out5p1 = _tex_read.a;
+	}
+
+// ColorOp:2
+	vec3 n_out2p0 = vec3(1.0) - (vec3(1.0) - n_out7p0) * (vec3(1.0) - n_out5p0);
+
+// Output:0
+	COLOR.rgb = n_out2p0;
+	COLOR.a = n_out5p1;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+custom_defines = ""
+graph_offset = Vector2( -1642.73, -75.6 )
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource( 3 )
+nodes/fragment/2/position = Vector2( 120, 0 )
+nodes/fragment/3/node = SubResource( 4 )
+nodes/fragment/3/position = Vector2( -400, 300 )
+nodes/fragment/4/node = SubResource( 5 )
+nodes/fragment/4/position = Vector2( -400, 200 )
+nodes/fragment/5/node = SubResource( 6 )
+nodes/fragment/5/position = Vector2( -120, 160 )
+nodes/fragment/6/node = SubResource( 7 )
+nodes/fragment/6/position = Vector2( -1700, 20 )
+nodes/fragment/7/node = SubResource( 8 )
+nodes/fragment/7/position = Vector2( -320, 0 )
+nodes/fragment/8/node = SubResource( 9 )
+nodes/fragment/8/position = Vector2( -1220, 20 )
+nodes/fragment/9/node = SubResource( 10 )
+nodes/fragment/9/position = Vector2( -940, 0 )
+nodes/fragment/10/node = SubResource( 1 )
+nodes/fragment/10/position = Vector2( -660, 20 )
+nodes/fragment/11/node = SubResource( 13 )
+nodes/fragment/11/position = Vector2( -1200, 120 )
+nodes/fragment/12/node = SubResource( 14 )
+nodes/fragment/12/position = Vector2( -1700, 120 )
+nodes/fragment/13/node = SubResource( 15 )
+nodes/fragment/13/position = Vector2( -1460, 0 )
+nodes/fragment/connections = PoolIntArray( 4, 0, 5, 0, 3, 0, 5, 2, 5, 1, 0, 1, 2, 0, 0, 0, 9, 0, 10, 0, 8, 0, 9, 0, 10, 0, 7, 0, 10, 0, 7, 1, 10, 0, 7, 2, 7, 0, 2, 0, 5, 0, 2, 1, 11, 0, 9, 1, 6, 0, 13, 0, 12, 0, 13, 1, 13, 0, 8, 0 )
+
+[sub_resource type="ShaderMaterial" id=25]
+resource_local_to_scene = true
+shader = SubResource( 24 )
+shader_param/AnimationSpeed = 2.0
+shader_param/AnimationMultiplier = 0.0
+
+[sub_resource type="VisualShader" id=26]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+uniform float AnimationSpeed;
+uniform float AnimationMultiplier;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:6
+	float n_out6p0 = TIME;
+
+// ScalarUniform:12
+	float n_out12p0 = AnimationSpeed;
+
+// ScalarOp:13
+	float n_out13p0 = n_out6p0 * n_out12p0;
+
+// ScalarFunc:8
+	float n_out8p0 = sin(n_out13p0);
+
+// ScalarUniform:11
+	float n_out11p0 = AnimationMultiplier;
+
+// ScalarOp:9
+	float n_out9p0 = n_out8p0 * n_out11p0;
+
+// ScalarFunc:10
+	float n_out10p0 = abs(n_out9p0);
+
+// VectorCompose:7
+	vec3 n_out7p0 = vec3(n_out10p0, n_out10p0, n_out10p0);
+
+// Input:4
+	vec3 n_out4p0 = vec3(UV, 0.0);
+
+// Input:3
+
+// Texture:5
+	vec3 n_out5p0;
+	float n_out5p1;
+	{
+		vec4 _tex_read = texture(TEXTURE, n_out4p0.xy);
+		n_out5p0 = _tex_read.rgb;
+		n_out5p1 = _tex_read.a;
+	}
+
+// ColorOp:2
+	vec3 n_out2p0 = vec3(1.0) - (vec3(1.0) - n_out7p0) * (vec3(1.0) - n_out5p0);
+
+// Output:0
+	COLOR.rgb = n_out2p0;
+	COLOR.a = n_out5p1;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+custom_defines = ""
+graph_offset = Vector2( -1642.73, -75.6 )
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource( 3 )
+nodes/fragment/2/position = Vector2( 120, 0 )
+nodes/fragment/3/node = SubResource( 4 )
+nodes/fragment/3/position = Vector2( -400, 300 )
+nodes/fragment/4/node = SubResource( 5 )
+nodes/fragment/4/position = Vector2( -400, 200 )
+nodes/fragment/5/node = SubResource( 6 )
+nodes/fragment/5/position = Vector2( -120, 160 )
+nodes/fragment/6/node = SubResource( 7 )
+nodes/fragment/6/position = Vector2( -1700, 20 )
+nodes/fragment/7/node = SubResource( 8 )
+nodes/fragment/7/position = Vector2( -320, 0 )
+nodes/fragment/8/node = SubResource( 9 )
+nodes/fragment/8/position = Vector2( -1220, 20 )
+nodes/fragment/9/node = SubResource( 10 )
+nodes/fragment/9/position = Vector2( -940, 0 )
+nodes/fragment/10/node = SubResource( 1 )
+nodes/fragment/10/position = Vector2( -660, 20 )
+nodes/fragment/11/node = SubResource( 13 )
+nodes/fragment/11/position = Vector2( -1200, 120 )
+nodes/fragment/12/node = SubResource( 14 )
+nodes/fragment/12/position = Vector2( -1700, 120 )
+nodes/fragment/13/node = SubResource( 15 )
+nodes/fragment/13/position = Vector2( -1460, 0 )
+nodes/fragment/connections = PoolIntArray( 4, 0, 5, 0, 3, 0, 5, 2, 5, 1, 0, 1, 2, 0, 0, 0, 9, 0, 10, 0, 8, 0, 9, 0, 10, 0, 7, 0, 10, 0, 7, 1, 10, 0, 7, 2, 7, 0, 2, 0, 5, 0, 2, 1, 11, 0, 9, 1, 6, 0, 13, 0, 12, 0, 13, 1, 13, 0, 8, 0 )
+
+[sub_resource type="ShaderMaterial" id=27]
+resource_local_to_scene = true
+shader = SubResource( 26 )
+shader_param/AnimationSpeed = 2.0
+shader_param/AnimationMultiplier = 0.0
+
+[sub_resource type="VisualShader" id=28]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+uniform float AnimationSpeed;
+uniform float AnimationMultiplier;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:6
+	float n_out6p0 = TIME;
+
+// ScalarUniform:12
+	float n_out12p0 = AnimationSpeed;
+
+// ScalarOp:13
+	float n_out13p0 = n_out6p0 * n_out12p0;
+
+// ScalarFunc:8
+	float n_out8p0 = sin(n_out13p0);
+
+// ScalarUniform:11
+	float n_out11p0 = AnimationMultiplier;
+
+// ScalarOp:9
+	float n_out9p0 = n_out8p0 * n_out11p0;
+
+// ScalarFunc:10
+	float n_out10p0 = abs(n_out9p0);
+
+// VectorCompose:7
+	vec3 n_out7p0 = vec3(n_out10p0, n_out10p0, n_out10p0);
+
+// Input:4
+	vec3 n_out4p0 = vec3(UV, 0.0);
+
+// Input:3
+
+// Texture:5
+	vec3 n_out5p0;
+	float n_out5p1;
+	{
+		vec4 _tex_read = texture(TEXTURE, n_out4p0.xy);
+		n_out5p0 = _tex_read.rgb;
+		n_out5p1 = _tex_read.a;
+	}
+
+// ColorOp:2
+	vec3 n_out2p0 = vec3(1.0) - (vec3(1.0) - n_out7p0) * (vec3(1.0) - n_out5p0);
+
+// Output:0
+	COLOR.rgb = n_out2p0;
+	COLOR.a = n_out5p1;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+custom_defines = ""
+graph_offset = Vector2( -1642.73, -75.6 )
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource( 3 )
+nodes/fragment/2/position = Vector2( 120, 0 )
+nodes/fragment/3/node = SubResource( 4 )
+nodes/fragment/3/position = Vector2( -400, 300 )
+nodes/fragment/4/node = SubResource( 5 )
+nodes/fragment/4/position = Vector2( -400, 200 )
+nodes/fragment/5/node = SubResource( 6 )
+nodes/fragment/5/position = Vector2( -120, 160 )
+nodes/fragment/6/node = SubResource( 7 )
+nodes/fragment/6/position = Vector2( -1700, 20 )
+nodes/fragment/7/node = SubResource( 8 )
+nodes/fragment/7/position = Vector2( -320, 0 )
+nodes/fragment/8/node = SubResource( 9 )
+nodes/fragment/8/position = Vector2( -1220, 20 )
+nodes/fragment/9/node = SubResource( 10 )
+nodes/fragment/9/position = Vector2( -940, 0 )
+nodes/fragment/10/node = SubResource( 1 )
+nodes/fragment/10/position = Vector2( -660, 20 )
+nodes/fragment/11/node = SubResource( 13 )
+nodes/fragment/11/position = Vector2( -1200, 120 )
+nodes/fragment/12/node = SubResource( 14 )
+nodes/fragment/12/position = Vector2( -1700, 120 )
+nodes/fragment/13/node = SubResource( 15 )
+nodes/fragment/13/position = Vector2( -1460, 0 )
+nodes/fragment/connections = PoolIntArray( 4, 0, 5, 0, 3, 0, 5, 2, 5, 1, 0, 1, 2, 0, 0, 0, 9, 0, 10, 0, 8, 0, 9, 0, 10, 0, 7, 0, 10, 0, 7, 1, 10, 0, 7, 2, 7, 0, 2, 0, 5, 0, 2, 1, 11, 0, 9, 1, 6, 0, 13, 0, 12, 0, 13, 1, 13, 0, 8, 0 )
+
+[sub_resource type="ShaderMaterial" id=29]
+resource_local_to_scene = true
+shader = SubResource( 28 )
+shader_param/AnimationSpeed = 2.0
+shader_param/AnimationMultiplier = 0.0
+
+[sub_resource type="VisualShader" id=30]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+uniform float AnimationSpeed;
+uniform float AnimationMultiplier;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:6
+	float n_out6p0 = TIME;
+
+// ScalarUniform:12
+	float n_out12p0 = AnimationSpeed;
+
+// ScalarOp:13
+	float n_out13p0 = n_out6p0 * n_out12p0;
+
+// ScalarFunc:8
+	float n_out8p0 = sin(n_out13p0);
+
+// ScalarUniform:11
+	float n_out11p0 = AnimationMultiplier;
+
+// ScalarOp:9
+	float n_out9p0 = n_out8p0 * n_out11p0;
+
+// ScalarFunc:10
+	float n_out10p0 = abs(n_out9p0);
+
+// VectorCompose:7
+	vec3 n_out7p0 = vec3(n_out10p0, n_out10p0, n_out10p0);
+
+// Input:4
+	vec3 n_out4p0 = vec3(UV, 0.0);
+
+// Input:3
+
+// Texture:5
+	vec3 n_out5p0;
+	float n_out5p1;
+	{
+		vec4 _tex_read = texture(TEXTURE, n_out4p0.xy);
+		n_out5p0 = _tex_read.rgb;
+		n_out5p1 = _tex_read.a;
+	}
+
+// ColorOp:2
+	vec3 n_out2p0 = vec3(1.0) - (vec3(1.0) - n_out7p0) * (vec3(1.0) - n_out5p0);
+
+// Output:0
+	COLOR.rgb = n_out2p0;
+	COLOR.a = n_out5p1;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+custom_defines = ""
+graph_offset = Vector2( -1642.73, -75.6 )
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource( 3 )
+nodes/fragment/2/position = Vector2( 120, 0 )
+nodes/fragment/3/node = SubResource( 4 )
+nodes/fragment/3/position = Vector2( -400, 300 )
+nodes/fragment/4/node = SubResource( 5 )
+nodes/fragment/4/position = Vector2( -400, 200 )
+nodes/fragment/5/node = SubResource( 6 )
+nodes/fragment/5/position = Vector2( -120, 160 )
+nodes/fragment/6/node = SubResource( 7 )
+nodes/fragment/6/position = Vector2( -1700, 20 )
+nodes/fragment/7/node = SubResource( 8 )
+nodes/fragment/7/position = Vector2( -320, 0 )
+nodes/fragment/8/node = SubResource( 9 )
+nodes/fragment/8/position = Vector2( -1220, 20 )
+nodes/fragment/9/node = SubResource( 10 )
+nodes/fragment/9/position = Vector2( -940, 0 )
+nodes/fragment/10/node = SubResource( 1 )
+nodes/fragment/10/position = Vector2( -660, 20 )
+nodes/fragment/11/node = SubResource( 13 )
+nodes/fragment/11/position = Vector2( -1200, 120 )
+nodes/fragment/12/node = SubResource( 14 )
+nodes/fragment/12/position = Vector2( -1700, 120 )
+nodes/fragment/13/node = SubResource( 15 )
+nodes/fragment/13/position = Vector2( -1460, 0 )
+nodes/fragment/connections = PoolIntArray( 4, 0, 5, 0, 3, 0, 5, 2, 5, 1, 0, 1, 2, 0, 0, 0, 9, 0, 10, 0, 8, 0, 9, 0, 10, 0, 7, 0, 10, 0, 7, 1, 10, 0, 7, 2, 7, 0, 2, 0, 5, 0, 2, 1, 11, 0, 9, 1, 6, 0, 13, 0, 12, 0, 13, 1, 13, 0, 8, 0 )
+
+[sub_resource type="ShaderMaterial" id=31]
+resource_local_to_scene = true
+shader = SubResource( 30 )
+shader_param/AnimationSpeed = 2.0
+shader_param/AnimationMultiplier = 0.0
+
+[sub_resource type="VisualShader" id=32]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+uniform float AnimationSpeed;
+uniform float AnimationMultiplier;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:6
+	float n_out6p0 = TIME;
+
+// ScalarUniform:12
+	float n_out12p0 = AnimationSpeed;
+
+// ScalarOp:13
+	float n_out13p0 = n_out6p0 * n_out12p0;
+
+// ScalarFunc:8
+	float n_out8p0 = sin(n_out13p0);
+
+// ScalarUniform:11
+	float n_out11p0 = AnimationMultiplier;
+
+// ScalarOp:9
+	float n_out9p0 = n_out8p0 * n_out11p0;
+
+// ScalarFunc:10
+	float n_out10p0 = abs(n_out9p0);
+
+// VectorCompose:7
+	vec3 n_out7p0 = vec3(n_out10p0, n_out10p0, n_out10p0);
+
+// Input:4
+	vec3 n_out4p0 = vec3(UV, 0.0);
+
+// Input:3
+
+// Texture:5
+	vec3 n_out5p0;
+	float n_out5p1;
+	{
+		vec4 _tex_read = texture(TEXTURE, n_out4p0.xy);
+		n_out5p0 = _tex_read.rgb;
+		n_out5p1 = _tex_read.a;
+	}
+
+// ColorOp:2
+	vec3 n_out2p0 = vec3(1.0) - (vec3(1.0) - n_out7p0) * (vec3(1.0) - n_out5p0);
+
+// Output:0
+	COLOR.rgb = n_out2p0;
+	COLOR.a = n_out5p1;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+custom_defines = ""
+graph_offset = Vector2( -1642.73, -75.6 )
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource( 3 )
+nodes/fragment/2/position = Vector2( 120, 0 )
+nodes/fragment/3/node = SubResource( 4 )
+nodes/fragment/3/position = Vector2( -400, 300 )
+nodes/fragment/4/node = SubResource( 5 )
+nodes/fragment/4/position = Vector2( -400, 200 )
+nodes/fragment/5/node = SubResource( 6 )
+nodes/fragment/5/position = Vector2( -120, 160 )
+nodes/fragment/6/node = SubResource( 7 )
+nodes/fragment/6/position = Vector2( -1700, 20 )
+nodes/fragment/7/node = SubResource( 8 )
+nodes/fragment/7/position = Vector2( -320, 0 )
+nodes/fragment/8/node = SubResource( 9 )
+nodes/fragment/8/position = Vector2( -1220, 20 )
+nodes/fragment/9/node = SubResource( 10 )
+nodes/fragment/9/position = Vector2( -940, 0 )
+nodes/fragment/10/node = SubResource( 1 )
+nodes/fragment/10/position = Vector2( -660, 20 )
+nodes/fragment/11/node = SubResource( 13 )
+nodes/fragment/11/position = Vector2( -1200, 120 )
+nodes/fragment/12/node = SubResource( 14 )
+nodes/fragment/12/position = Vector2( -1700, 120 )
+nodes/fragment/13/node = SubResource( 15 )
+nodes/fragment/13/position = Vector2( -1460, 0 )
+nodes/fragment/connections = PoolIntArray( 4, 0, 5, 0, 3, 0, 5, 2, 5, 1, 0, 1, 2, 0, 0, 0, 9, 0, 10, 0, 8, 0, 9, 0, 10, 0, 7, 0, 10, 0, 7, 1, 10, 0, 7, 2, 7, 0, 2, 0, 5, 0, 2, 1, 11, 0, 9, 1, 6, 0, 13, 0, 12, 0, 13, 1, 13, 0, 8, 0 )
+
+[sub_resource type="ShaderMaterial" id=33]
+resource_local_to_scene = true
+shader = SubResource( 32 )
+shader_param/AnimationSpeed = 2.0
+shader_param/AnimationMultiplier = 0.0
+
+[sub_resource type="VisualShader" id=34]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+uniform float AnimationSpeed;
+uniform float AnimationMultiplier;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:6
+	float n_out6p0 = TIME;
+
+// ScalarUniform:12
+	float n_out12p0 = AnimationSpeed;
+
+// ScalarOp:13
+	float n_out13p0 = n_out6p0 * n_out12p0;
+
+// ScalarFunc:8
+	float n_out8p0 = sin(n_out13p0);
+
+// ScalarUniform:11
+	float n_out11p0 = AnimationMultiplier;
+
+// ScalarOp:9
+	float n_out9p0 = n_out8p0 * n_out11p0;
+
+// ScalarFunc:10
+	float n_out10p0 = abs(n_out9p0);
+
+// VectorCompose:7
+	vec3 n_out7p0 = vec3(n_out10p0, n_out10p0, n_out10p0);
+
+// Input:4
+	vec3 n_out4p0 = vec3(UV, 0.0);
+
+// Input:3
+
+// Texture:5
+	vec3 n_out5p0;
+	float n_out5p1;
+	{
+		vec4 _tex_read = texture(TEXTURE, n_out4p0.xy);
+		n_out5p0 = _tex_read.rgb;
+		n_out5p1 = _tex_read.a;
+	}
+
+// ColorOp:2
+	vec3 n_out2p0 = vec3(1.0) - (vec3(1.0) - n_out7p0) * (vec3(1.0) - n_out5p0);
+
+// Output:0
+	COLOR.rgb = n_out2p0;
+	COLOR.a = n_out5p1;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+custom_defines = ""
+graph_offset = Vector2( -1642.73, -75.6 )
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource( 3 )
+nodes/fragment/2/position = Vector2( 120, 0 )
+nodes/fragment/3/node = SubResource( 4 )
+nodes/fragment/3/position = Vector2( -400, 300 )
+nodes/fragment/4/node = SubResource( 5 )
+nodes/fragment/4/position = Vector2( -400, 200 )
+nodes/fragment/5/node = SubResource( 6 )
+nodes/fragment/5/position = Vector2( -120, 160 )
+nodes/fragment/6/node = SubResource( 7 )
+nodes/fragment/6/position = Vector2( -1700, 20 )
+nodes/fragment/7/node = SubResource( 8 )
+nodes/fragment/7/position = Vector2( -320, 0 )
+nodes/fragment/8/node = SubResource( 9 )
+nodes/fragment/8/position = Vector2( -1220, 20 )
+nodes/fragment/9/node = SubResource( 10 )
+nodes/fragment/9/position = Vector2( -940, 0 )
+nodes/fragment/10/node = SubResource( 1 )
+nodes/fragment/10/position = Vector2( -660, 20 )
+nodes/fragment/11/node = SubResource( 13 )
+nodes/fragment/11/position = Vector2( -1200, 120 )
+nodes/fragment/12/node = SubResource( 14 )
+nodes/fragment/12/position = Vector2( -1700, 120 )
+nodes/fragment/13/node = SubResource( 15 )
+nodes/fragment/13/position = Vector2( -1460, 0 )
+nodes/fragment/connections = PoolIntArray( 4, 0, 5, 0, 3, 0, 5, 2, 5, 1, 0, 1, 2, 0, 0, 0, 9, 0, 10, 0, 8, 0, 9, 0, 10, 0, 7, 0, 10, 0, 7, 1, 10, 0, 7, 2, 7, 0, 2, 0, 5, 0, 2, 1, 11, 0, 9, 1, 6, 0, 13, 0, 12, 0, 13, 1, 13, 0, 8, 0 )
+
+[sub_resource type="ShaderMaterial" id=35]
+resource_local_to_scene = true
+shader = SubResource( 34 )
+shader_param/AnimationSpeed = 2.0
+shader_param/AnimationMultiplier = 0.0
+
+[sub_resource type="VisualShader" id=36]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+uniform float AnimationSpeed;
+uniform float AnimationMultiplier;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:6
+	float n_out6p0 = TIME;
+
+// ScalarUniform:12
+	float n_out12p0 = AnimationSpeed;
+
+// ScalarOp:13
+	float n_out13p0 = n_out6p0 * n_out12p0;
+
+// ScalarFunc:8
+	float n_out8p0 = sin(n_out13p0);
+
+// ScalarUniform:11
+	float n_out11p0 = AnimationMultiplier;
+
+// ScalarOp:9
+	float n_out9p0 = n_out8p0 * n_out11p0;
+
+// ScalarFunc:10
+	float n_out10p0 = abs(n_out9p0);
+
+// VectorCompose:7
+	vec3 n_out7p0 = vec3(n_out10p0, n_out10p0, n_out10p0);
+
+// Input:4
+	vec3 n_out4p0 = vec3(UV, 0.0);
+
+// Input:3
+
+// Texture:5
+	vec3 n_out5p0;
+	float n_out5p1;
+	{
+		vec4 _tex_read = texture(TEXTURE, n_out4p0.xy);
+		n_out5p0 = _tex_read.rgb;
+		n_out5p1 = _tex_read.a;
+	}
+
+// ColorOp:2
+	vec3 n_out2p0 = vec3(1.0) - (vec3(1.0) - n_out7p0) * (vec3(1.0) - n_out5p0);
+
+// Output:0
+	COLOR.rgb = n_out2p0;
+	COLOR.a = n_out5p1;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+custom_defines = ""
+graph_offset = Vector2( -1642.73, -75.6 )
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource( 3 )
+nodes/fragment/2/position = Vector2( 120, 0 )
+nodes/fragment/3/node = SubResource( 4 )
+nodes/fragment/3/position = Vector2( -400, 300 )
+nodes/fragment/4/node = SubResource( 5 )
+nodes/fragment/4/position = Vector2( -400, 200 )
+nodes/fragment/5/node = SubResource( 6 )
+nodes/fragment/5/position = Vector2( -120, 160 )
+nodes/fragment/6/node = SubResource( 7 )
+nodes/fragment/6/position = Vector2( -1700, 20 )
+nodes/fragment/7/node = SubResource( 8 )
+nodes/fragment/7/position = Vector2( -320, 0 )
+nodes/fragment/8/node = SubResource( 9 )
+nodes/fragment/8/position = Vector2( -1220, 20 )
+nodes/fragment/9/node = SubResource( 10 )
+nodes/fragment/9/position = Vector2( -940, 0 )
+nodes/fragment/10/node = SubResource( 1 )
+nodes/fragment/10/position = Vector2( -660, 20 )
+nodes/fragment/11/node = SubResource( 13 )
+nodes/fragment/11/position = Vector2( -1200, 120 )
+nodes/fragment/12/node = SubResource( 14 )
+nodes/fragment/12/position = Vector2( -1700, 120 )
+nodes/fragment/13/node = SubResource( 15 )
+nodes/fragment/13/position = Vector2( -1460, 0 )
+nodes/fragment/connections = PoolIntArray( 4, 0, 5, 0, 3, 0, 5, 2, 5, 1, 0, 1, 2, 0, 0, 0, 9, 0, 10, 0, 8, 0, 9, 0, 10, 0, 7, 0, 10, 0, 7, 1, 10, 0, 7, 2, 7, 0, 2, 0, 5, 0, 2, 1, 11, 0, 9, 1, 6, 0, 13, 0, 12, 0, 13, 1, 13, 0, 8, 0 )
+
+[sub_resource type="ShaderMaterial" id=37]
+resource_local_to_scene = true
+shader = SubResource( 36 )
+shader_param/AnimationSpeed = 2.0
+shader_param/AnimationMultiplier = 0.0
+
+[sub_resource type="VisualShader" id=38]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+uniform float AnimationSpeed;
+uniform float AnimationMultiplier;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:6
+	float n_out6p0 = TIME;
+
+// ScalarUniform:12
+	float n_out12p0 = AnimationSpeed;
+
+// ScalarOp:13
+	float n_out13p0 = n_out6p0 * n_out12p0;
+
+// ScalarFunc:8
+	float n_out8p0 = sin(n_out13p0);
+
+// ScalarUniform:11
+	float n_out11p0 = AnimationMultiplier;
+
+// ScalarOp:9
+	float n_out9p0 = n_out8p0 * n_out11p0;
+
+// ScalarFunc:10
+	float n_out10p0 = abs(n_out9p0);
+
+// VectorCompose:7
+	vec3 n_out7p0 = vec3(n_out10p0, n_out10p0, n_out10p0);
+
+// Input:4
+	vec3 n_out4p0 = vec3(UV, 0.0);
+
+// Input:3
+
+// Texture:5
+	vec3 n_out5p0;
+	float n_out5p1;
+	{
+		vec4 _tex_read = texture(TEXTURE, n_out4p0.xy);
+		n_out5p0 = _tex_read.rgb;
+		n_out5p1 = _tex_read.a;
+	}
+
+// ColorOp:2
+	vec3 n_out2p0 = vec3(1.0) - (vec3(1.0) - n_out7p0) * (vec3(1.0) - n_out5p0);
+
+// Output:0
+	COLOR.rgb = n_out2p0;
+	COLOR.a = n_out5p1;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+custom_defines = ""
+graph_offset = Vector2( -1642.73, -75.6 )
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource( 3 )
+nodes/fragment/2/position = Vector2( 120, 0 )
+nodes/fragment/3/node = SubResource( 4 )
+nodes/fragment/3/position = Vector2( -400, 300 )
+nodes/fragment/4/node = SubResource( 5 )
+nodes/fragment/4/position = Vector2( -400, 200 )
+nodes/fragment/5/node = SubResource( 6 )
+nodes/fragment/5/position = Vector2( -120, 160 )
+nodes/fragment/6/node = SubResource( 7 )
+nodes/fragment/6/position = Vector2( -1700, 20 )
+nodes/fragment/7/node = SubResource( 8 )
+nodes/fragment/7/position = Vector2( -320, 0 )
+nodes/fragment/8/node = SubResource( 9 )
+nodes/fragment/8/position = Vector2( -1220, 20 )
+nodes/fragment/9/node = SubResource( 10 )
+nodes/fragment/9/position = Vector2( -940, 0 )
+nodes/fragment/10/node = SubResource( 1 )
+nodes/fragment/10/position = Vector2( -660, 20 )
+nodes/fragment/11/node = SubResource( 13 )
+nodes/fragment/11/position = Vector2( -1200, 120 )
+nodes/fragment/12/node = SubResource( 14 )
+nodes/fragment/12/position = Vector2( -1700, 120 )
+nodes/fragment/13/node = SubResource( 15 )
+nodes/fragment/13/position = Vector2( -1460, 0 )
+nodes/fragment/connections = PoolIntArray( 4, 0, 5, 0, 3, 0, 5, 2, 5, 1, 0, 1, 2, 0, 0, 0, 9, 0, 10, 0, 8, 0, 9, 0, 10, 0, 7, 0, 10, 0, 7, 1, 10, 0, 7, 2, 7, 0, 2, 0, 5, 0, 2, 1, 11, 0, 9, 1, 6, 0, 13, 0, 12, 0, 13, 1, 13, 0, 8, 0 )
+
+[sub_resource type="ShaderMaterial" id=39]
+resource_local_to_scene = true
+shader = SubResource( 38 )
+shader_param/AnimationSpeed = 2.0
+shader_param/AnimationMultiplier = 0.0
+
+[sub_resource type="VisualShader" id=40]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+uniform float AnimationSpeed;
+uniform float AnimationMultiplier;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:6
+	float n_out6p0 = TIME;
+
+// ScalarUniform:12
+	float n_out12p0 = AnimationSpeed;
+
+// ScalarOp:13
+	float n_out13p0 = n_out6p0 * n_out12p0;
+
+// ScalarFunc:8
+	float n_out8p0 = sin(n_out13p0);
+
+// ScalarUniform:11
+	float n_out11p0 = AnimationMultiplier;
+
+// ScalarOp:9
+	float n_out9p0 = n_out8p0 * n_out11p0;
+
+// ScalarFunc:10
+	float n_out10p0 = abs(n_out9p0);
+
+// VectorCompose:7
+	vec3 n_out7p0 = vec3(n_out10p0, n_out10p0, n_out10p0);
+
+// Input:4
+	vec3 n_out4p0 = vec3(UV, 0.0);
+
+// Input:3
+
+// Texture:5
+	vec3 n_out5p0;
+	float n_out5p1;
+	{
+		vec4 _tex_read = texture(TEXTURE, n_out4p0.xy);
+		n_out5p0 = _tex_read.rgb;
+		n_out5p1 = _tex_read.a;
+	}
+
+// ColorOp:2
+	vec3 n_out2p0 = vec3(1.0) - (vec3(1.0) - n_out7p0) * (vec3(1.0) - n_out5p0);
+
+// Output:0
+	COLOR.rgb = n_out2p0;
+	COLOR.a = n_out5p1;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+custom_defines = ""
+graph_offset = Vector2( -1642.73, -75.6 )
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource( 3 )
+nodes/fragment/2/position = Vector2( 120, 0 )
+nodes/fragment/3/node = SubResource( 4 )
+nodes/fragment/3/position = Vector2( -400, 300 )
+nodes/fragment/4/node = SubResource( 5 )
+nodes/fragment/4/position = Vector2( -400, 200 )
+nodes/fragment/5/node = SubResource( 6 )
+nodes/fragment/5/position = Vector2( -120, 160 )
+nodes/fragment/6/node = SubResource( 7 )
+nodes/fragment/6/position = Vector2( -1700, 20 )
+nodes/fragment/7/node = SubResource( 8 )
+nodes/fragment/7/position = Vector2( -320, 0 )
+nodes/fragment/8/node = SubResource( 9 )
+nodes/fragment/8/position = Vector2( -1220, 20 )
+nodes/fragment/9/node = SubResource( 10 )
+nodes/fragment/9/position = Vector2( -940, 0 )
+nodes/fragment/10/node = SubResource( 1 )
+nodes/fragment/10/position = Vector2( -660, 20 )
+nodes/fragment/11/node = SubResource( 13 )
+nodes/fragment/11/position = Vector2( -1200, 120 )
+nodes/fragment/12/node = SubResource( 14 )
+nodes/fragment/12/position = Vector2( -1700, 120 )
+nodes/fragment/13/node = SubResource( 15 )
+nodes/fragment/13/position = Vector2( -1460, 0 )
+nodes/fragment/connections = PoolIntArray( 4, 0, 5, 0, 3, 0, 5, 2, 5, 1, 0, 1, 2, 0, 0, 0, 9, 0, 10, 0, 8, 0, 9, 0, 10, 0, 7, 0, 10, 0, 7, 1, 10, 0, 7, 2, 7, 0, 2, 0, 5, 0, 2, 1, 11, 0, 9, 1, 6, 0, 13, 0, 12, 0, 13, 1, 13, 0, 8, 0 )
+
+[sub_resource type="ShaderMaterial" id=41]
+resource_local_to_scene = true
+shader = SubResource( 40 )
+shader_param/AnimationSpeed = 2.0
+shader_param/AnimationMultiplier = 0.0
+
+[sub_resource type="VisualShader" id=42]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+uniform float AnimationSpeed;
+uniform float AnimationMultiplier;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:6
+	float n_out6p0 = TIME;
+
+// ScalarUniform:12
+	float n_out12p0 = AnimationSpeed;
+
+// ScalarOp:13
+	float n_out13p0 = n_out6p0 * n_out12p0;
+
+// ScalarFunc:8
+	float n_out8p0 = sin(n_out13p0);
+
+// ScalarUniform:11
+	float n_out11p0 = AnimationMultiplier;
+
+// ScalarOp:9
+	float n_out9p0 = n_out8p0 * n_out11p0;
+
+// ScalarFunc:10
+	float n_out10p0 = abs(n_out9p0);
+
+// VectorCompose:7
+	vec3 n_out7p0 = vec3(n_out10p0, n_out10p0, n_out10p0);
+
+// Input:4
+	vec3 n_out4p0 = vec3(UV, 0.0);
+
+// Input:3
+
+// Texture:5
+	vec3 n_out5p0;
+	float n_out5p1;
+	{
+		vec4 _tex_read = texture(TEXTURE, n_out4p0.xy);
+		n_out5p0 = _tex_read.rgb;
+		n_out5p1 = _tex_read.a;
+	}
+
+// ColorOp:2
+	vec3 n_out2p0 = vec3(1.0) - (vec3(1.0) - n_out7p0) * (vec3(1.0) - n_out5p0);
+
+// Output:0
+	COLOR.rgb = n_out2p0;
+	COLOR.a = n_out5p1;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+custom_defines = ""
+graph_offset = Vector2( -1642.73, -75.6 )
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource( 3 )
+nodes/fragment/2/position = Vector2( 120, 0 )
+nodes/fragment/3/node = SubResource( 4 )
+nodes/fragment/3/position = Vector2( -400, 300 )
+nodes/fragment/4/node = SubResource( 5 )
+nodes/fragment/4/position = Vector2( -400, 200 )
+nodes/fragment/5/node = SubResource( 6 )
+nodes/fragment/5/position = Vector2( -120, 160 )
+nodes/fragment/6/node = SubResource( 7 )
+nodes/fragment/6/position = Vector2( -1700, 20 )
+nodes/fragment/7/node = SubResource( 8 )
+nodes/fragment/7/position = Vector2( -320, 0 )
+nodes/fragment/8/node = SubResource( 9 )
+nodes/fragment/8/position = Vector2( -1220, 20 )
+nodes/fragment/9/node = SubResource( 10 )
+nodes/fragment/9/position = Vector2( -940, 0 )
+nodes/fragment/10/node = SubResource( 1 )
+nodes/fragment/10/position = Vector2( -660, 20 )
+nodes/fragment/11/node = SubResource( 13 )
+nodes/fragment/11/position = Vector2( -1200, 120 )
+nodes/fragment/12/node = SubResource( 14 )
+nodes/fragment/12/position = Vector2( -1700, 120 )
+nodes/fragment/13/node = SubResource( 15 )
+nodes/fragment/13/position = Vector2( -1460, 0 )
+nodes/fragment/connections = PoolIntArray( 4, 0, 5, 0, 3, 0, 5, 2, 5, 1, 0, 1, 2, 0, 0, 0, 9, 0, 10, 0, 8, 0, 9, 0, 10, 0, 7, 0, 10, 0, 7, 1, 10, 0, 7, 2, 7, 0, 2, 0, 5, 0, 2, 1, 11, 0, 9, 1, 6, 0, 13, 0, 12, 0, 13, 1, 13, 0, 8, 0 )
+
+[sub_resource type="ShaderMaterial" id=43]
+resource_local_to_scene = true
+shader = SubResource( 42 )
+shader_param/AnimationSpeed = 2.0
+shader_param/AnimationMultiplier = 0.0
+
+[sub_resource type="VisualShader" id=44]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+uniform float AnimationSpeed;
+uniform float AnimationMultiplier;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:6
+	float n_out6p0 = TIME;
+
+// ScalarUniform:12
+	float n_out12p0 = AnimationSpeed;
+
+// ScalarOp:13
+	float n_out13p0 = n_out6p0 * n_out12p0;
+
+// ScalarFunc:8
+	float n_out8p0 = sin(n_out13p0);
+
+// ScalarUniform:11
+	float n_out11p0 = AnimationMultiplier;
+
+// ScalarOp:9
+	float n_out9p0 = n_out8p0 * n_out11p0;
+
+// ScalarFunc:10
+	float n_out10p0 = abs(n_out9p0);
+
+// VectorCompose:7
+	vec3 n_out7p0 = vec3(n_out10p0, n_out10p0, n_out10p0);
+
+// Input:4
+	vec3 n_out4p0 = vec3(UV, 0.0);
+
+// Input:3
+
+// Texture:5
+	vec3 n_out5p0;
+	float n_out5p1;
+	{
+		vec4 _tex_read = texture(TEXTURE, n_out4p0.xy);
+		n_out5p0 = _tex_read.rgb;
+		n_out5p1 = _tex_read.a;
+	}
+
+// ColorOp:2
+	vec3 n_out2p0 = vec3(1.0) - (vec3(1.0) - n_out7p0) * (vec3(1.0) - n_out5p0);
+
+// Output:0
+	COLOR.rgb = n_out2p0;
+	COLOR.a = n_out5p1;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+custom_defines = ""
+graph_offset = Vector2( -1642.73, -75.6 )
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource( 3 )
+nodes/fragment/2/position = Vector2( 120, 0 )
+nodes/fragment/3/node = SubResource( 4 )
+nodes/fragment/3/position = Vector2( -400, 300 )
+nodes/fragment/4/node = SubResource( 5 )
+nodes/fragment/4/position = Vector2( -400, 200 )
+nodes/fragment/5/node = SubResource( 6 )
+nodes/fragment/5/position = Vector2( -120, 160 )
+nodes/fragment/6/node = SubResource( 7 )
+nodes/fragment/6/position = Vector2( -1700, 20 )
+nodes/fragment/7/node = SubResource( 8 )
+nodes/fragment/7/position = Vector2( -320, 0 )
+nodes/fragment/8/node = SubResource( 9 )
+nodes/fragment/8/position = Vector2( -1220, 20 )
+nodes/fragment/9/node = SubResource( 10 )
+nodes/fragment/9/position = Vector2( -940, 0 )
+nodes/fragment/10/node = SubResource( 1 )
+nodes/fragment/10/position = Vector2( -660, 20 )
+nodes/fragment/11/node = SubResource( 13 )
+nodes/fragment/11/position = Vector2( -1200, 120 )
+nodes/fragment/12/node = SubResource( 14 )
+nodes/fragment/12/position = Vector2( -1700, 120 )
+nodes/fragment/13/node = SubResource( 15 )
+nodes/fragment/13/position = Vector2( -1460, 0 )
+nodes/fragment/connections = PoolIntArray( 4, 0, 5, 0, 3, 0, 5, 2, 5, 1, 0, 1, 2, 0, 0, 0, 9, 0, 10, 0, 8, 0, 9, 0, 10, 0, 7, 0, 10, 0, 7, 1, 10, 0, 7, 2, 7, 0, 2, 0, 5, 0, 2, 1, 11, 0, 9, 1, 6, 0, 13, 0, 12, 0, 13, 1, 13, 0, 8, 0 )
+
+[sub_resource type="ShaderMaterial" id=45]
+resource_local_to_scene = true
+shader = SubResource( 44 )
+shader_param/AnimationSpeed = 2.0
+shader_param/AnimationMultiplier = 0.0
+
+[sub_resource type="VisualShader" id=46]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+uniform float AnimationSpeed;
+uniform float AnimationMultiplier;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:6
+	float n_out6p0 = TIME;
+
+// ScalarUniform:12
+	float n_out12p0 = AnimationSpeed;
+
+// ScalarOp:13
+	float n_out13p0 = n_out6p0 * n_out12p0;
+
+// ScalarFunc:8
+	float n_out8p0 = sin(n_out13p0);
+
+// ScalarUniform:11
+	float n_out11p0 = AnimationMultiplier;
+
+// ScalarOp:9
+	float n_out9p0 = n_out8p0 * n_out11p0;
+
+// ScalarFunc:10
+	float n_out10p0 = abs(n_out9p0);
+
+// VectorCompose:7
+	vec3 n_out7p0 = vec3(n_out10p0, n_out10p0, n_out10p0);
+
+// Input:4
+	vec3 n_out4p0 = vec3(UV, 0.0);
+
+// Input:3
+
+// Texture:5
+	vec3 n_out5p0;
+	float n_out5p1;
+	{
+		vec4 _tex_read = texture(TEXTURE, n_out4p0.xy);
+		n_out5p0 = _tex_read.rgb;
+		n_out5p1 = _tex_read.a;
+	}
+
+// ColorOp:2
+	vec3 n_out2p0 = vec3(1.0) - (vec3(1.0) - n_out7p0) * (vec3(1.0) - n_out5p0);
+
+// Output:0
+	COLOR.rgb = n_out2p0;
+	COLOR.a = n_out5p1;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+custom_defines = ""
+graph_offset = Vector2( -1642.73, -75.6 )
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource( 3 )
+nodes/fragment/2/position = Vector2( 120, 0 )
+nodes/fragment/3/node = SubResource( 4 )
+nodes/fragment/3/position = Vector2( -400, 300 )
+nodes/fragment/4/node = SubResource( 5 )
+nodes/fragment/4/position = Vector2( -400, 200 )
+nodes/fragment/5/node = SubResource( 6 )
+nodes/fragment/5/position = Vector2( -120, 160 )
+nodes/fragment/6/node = SubResource( 7 )
+nodes/fragment/6/position = Vector2( -1700, 20 )
+nodes/fragment/7/node = SubResource( 8 )
+nodes/fragment/7/position = Vector2( -320, 0 )
+nodes/fragment/8/node = SubResource( 9 )
+nodes/fragment/8/position = Vector2( -1220, 20 )
+nodes/fragment/9/node = SubResource( 10 )
+nodes/fragment/9/position = Vector2( -940, 0 )
+nodes/fragment/10/node = SubResource( 1 )
+nodes/fragment/10/position = Vector2( -660, 20 )
+nodes/fragment/11/node = SubResource( 13 )
+nodes/fragment/11/position = Vector2( -1200, 120 )
+nodes/fragment/12/node = SubResource( 14 )
+nodes/fragment/12/position = Vector2( -1700, 120 )
+nodes/fragment/13/node = SubResource( 15 )
+nodes/fragment/13/position = Vector2( -1460, 0 )
+nodes/fragment/connections = PoolIntArray( 4, 0, 5, 0, 3, 0, 5, 2, 5, 1, 0, 1, 2, 0, 0, 0, 9, 0, 10, 0, 8, 0, 9, 0, 10, 0, 7, 0, 10, 0, 7, 1, 10, 0, 7, 2, 7, 0, 2, 0, 5, 0, 2, 1, 11, 0, 9, 1, 6, 0, 13, 0, 12, 0, 13, 1, 13, 0, 8, 0 )
+
+[sub_resource type="ShaderMaterial" id=47]
+resource_local_to_scene = true
+shader = SubResource( 46 )
+shader_param/AnimationSpeed = 2.0
+shader_param/AnimationMultiplier = 0.0
+
+[sub_resource type="VisualShader" id=48]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+uniform float AnimationSpeed;
+uniform float AnimationMultiplier;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:6
+	float n_out6p0 = TIME;
+
+// ScalarUniform:12
+	float n_out12p0 = AnimationSpeed;
+
+// ScalarOp:13
+	float n_out13p0 = n_out6p0 * n_out12p0;
+
+// ScalarFunc:8
+	float n_out8p0 = sin(n_out13p0);
+
+// ScalarUniform:11
+	float n_out11p0 = AnimationMultiplier;
+
+// ScalarOp:9
+	float n_out9p0 = n_out8p0 * n_out11p0;
+
+// ScalarFunc:10
+	float n_out10p0 = abs(n_out9p0);
+
+// VectorCompose:7
+	vec3 n_out7p0 = vec3(n_out10p0, n_out10p0, n_out10p0);
+
+// Input:4
+	vec3 n_out4p0 = vec3(UV, 0.0);
+
+// Input:3
+
+// Texture:5
+	vec3 n_out5p0;
+	float n_out5p1;
+	{
+		vec4 _tex_read = texture(TEXTURE, n_out4p0.xy);
+		n_out5p0 = _tex_read.rgb;
+		n_out5p1 = _tex_read.a;
+	}
+
+// ColorOp:2
+	vec3 n_out2p0 = vec3(1.0) - (vec3(1.0) - n_out7p0) * (vec3(1.0) - n_out5p0);
+
+// Output:0
+	COLOR.rgb = n_out2p0;
+	COLOR.a = n_out5p1;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+custom_defines = ""
+graph_offset = Vector2( -1642.73, -75.6 )
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource( 3 )
+nodes/fragment/2/position = Vector2( 120, 0 )
+nodes/fragment/3/node = SubResource( 4 )
+nodes/fragment/3/position = Vector2( -400, 300 )
+nodes/fragment/4/node = SubResource( 5 )
+nodes/fragment/4/position = Vector2( -400, 200 )
+nodes/fragment/5/node = SubResource( 6 )
+nodes/fragment/5/position = Vector2( -120, 160 )
+nodes/fragment/6/node = SubResource( 7 )
+nodes/fragment/6/position = Vector2( -1700, 20 )
+nodes/fragment/7/node = SubResource( 8 )
+nodes/fragment/7/position = Vector2( -320, 0 )
+nodes/fragment/8/node = SubResource( 9 )
+nodes/fragment/8/position = Vector2( -1220, 20 )
+nodes/fragment/9/node = SubResource( 10 )
+nodes/fragment/9/position = Vector2( -940, 0 )
+nodes/fragment/10/node = SubResource( 1 )
+nodes/fragment/10/position = Vector2( -660, 20 )
+nodes/fragment/11/node = SubResource( 13 )
+nodes/fragment/11/position = Vector2( -1200, 120 )
+nodes/fragment/12/node = SubResource( 14 )
+nodes/fragment/12/position = Vector2( -1700, 120 )
+nodes/fragment/13/node = SubResource( 15 )
+nodes/fragment/13/position = Vector2( -1460, 0 )
+nodes/fragment/connections = PoolIntArray( 4, 0, 5, 0, 3, 0, 5, 2, 5, 1, 0, 1, 2, 0, 0, 0, 9, 0, 10, 0, 8, 0, 9, 0, 10, 0, 7, 0, 10, 0, 7, 1, 10, 0, 7, 2, 7, 0, 2, 0, 5, 0, 2, 1, 11, 0, 9, 1, 6, 0, 13, 0, 12, 0, 13, 1, 13, 0, 8, 0 )
+
+[sub_resource type="ShaderMaterial" id=49]
+resource_local_to_scene = true
+shader = SubResource( 48 )
+shader_param/AnimationSpeed = 2.0
+shader_param/AnimationMultiplier = 0.0
+
+[sub_resource type="VisualShader" id=50]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+uniform float AnimationSpeed;
+uniform float AnimationMultiplier;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:6
+	float n_out6p0 = TIME;
+
+// ScalarUniform:12
+	float n_out12p0 = AnimationSpeed;
+
+// ScalarOp:13
+	float n_out13p0 = n_out6p0 * n_out12p0;
+
+// ScalarFunc:8
+	float n_out8p0 = sin(n_out13p0);
+
+// ScalarUniform:11
+	float n_out11p0 = AnimationMultiplier;
+
+// ScalarOp:9
+	float n_out9p0 = n_out8p0 * n_out11p0;
+
+// ScalarFunc:10
+	float n_out10p0 = abs(n_out9p0);
+
+// VectorCompose:7
+	vec3 n_out7p0 = vec3(n_out10p0, n_out10p0, n_out10p0);
+
+// Input:4
+	vec3 n_out4p0 = vec3(UV, 0.0);
+
+// Input:3
+
+// Texture:5
+	vec3 n_out5p0;
+	float n_out5p1;
+	{
+		vec4 _tex_read = texture(TEXTURE, n_out4p0.xy);
+		n_out5p0 = _tex_read.rgb;
+		n_out5p1 = _tex_read.a;
+	}
+
+// ColorOp:2
+	vec3 n_out2p0 = vec3(1.0) - (vec3(1.0) - n_out7p0) * (vec3(1.0) - n_out5p0);
+
+// Output:0
+	COLOR.rgb = n_out2p0;
+	COLOR.a = n_out5p1;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+custom_defines = ""
+graph_offset = Vector2( -1642.73, -75.6 )
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource( 3 )
+nodes/fragment/2/position = Vector2( 120, 0 )
+nodes/fragment/3/node = SubResource( 4 )
+nodes/fragment/3/position = Vector2( -400, 300 )
+nodes/fragment/4/node = SubResource( 5 )
+nodes/fragment/4/position = Vector2( -400, 200 )
+nodes/fragment/5/node = SubResource( 6 )
+nodes/fragment/5/position = Vector2( -120, 160 )
+nodes/fragment/6/node = SubResource( 7 )
+nodes/fragment/6/position = Vector2( -1700, 20 )
+nodes/fragment/7/node = SubResource( 8 )
+nodes/fragment/7/position = Vector2( -320, 0 )
+nodes/fragment/8/node = SubResource( 9 )
+nodes/fragment/8/position = Vector2( -1220, 20 )
+nodes/fragment/9/node = SubResource( 10 )
+nodes/fragment/9/position = Vector2( -940, 0 )
+nodes/fragment/10/node = SubResource( 1 )
+nodes/fragment/10/position = Vector2( -660, 20 )
+nodes/fragment/11/node = SubResource( 13 )
+nodes/fragment/11/position = Vector2( -1200, 120 )
+nodes/fragment/12/node = SubResource( 14 )
+nodes/fragment/12/position = Vector2( -1700, 120 )
+nodes/fragment/13/node = SubResource( 15 )
+nodes/fragment/13/position = Vector2( -1460, 0 )
+nodes/fragment/connections = PoolIntArray( 4, 0, 5, 0, 3, 0, 5, 2, 5, 1, 0, 1, 2, 0, 0, 0, 9, 0, 10, 0, 8, 0, 9, 0, 10, 0, 7, 0, 10, 0, 7, 1, 10, 0, 7, 2, 7, 0, 2, 0, 5, 0, 2, 1, 11, 0, 9, 1, 6, 0, 13, 0, 12, 0, 13, 1, 13, 0, 8, 0 )
+
+[sub_resource type="ShaderMaterial" id=51]
+resource_local_to_scene = true
+shader = SubResource( 50 )
+shader_param/AnimationSpeed = 2.0
+shader_param/AnimationMultiplier = 0.0
+
+[sub_resource type="VisualShader" id=52]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+uniform float AnimationSpeed;
+uniform float AnimationMultiplier;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:6
+	float n_out6p0 = TIME;
+
+// ScalarUniform:12
+	float n_out12p0 = AnimationSpeed;
+
+// ScalarOp:13
+	float n_out13p0 = n_out6p0 * n_out12p0;
+
+// ScalarFunc:8
+	float n_out8p0 = sin(n_out13p0);
+
+// ScalarUniform:11
+	float n_out11p0 = AnimationMultiplier;
+
+// ScalarOp:9
+	float n_out9p0 = n_out8p0 * n_out11p0;
+
+// ScalarFunc:10
+	float n_out10p0 = abs(n_out9p0);
+
+// VectorCompose:7
+	vec3 n_out7p0 = vec3(n_out10p0, n_out10p0, n_out10p0);
+
+// Input:4
+	vec3 n_out4p0 = vec3(UV, 0.0);
+
+// Input:3
+
+// Texture:5
+	vec3 n_out5p0;
+	float n_out5p1;
+	{
+		vec4 _tex_read = texture(TEXTURE, n_out4p0.xy);
+		n_out5p0 = _tex_read.rgb;
+		n_out5p1 = _tex_read.a;
+	}
+
+// ColorOp:2
+	vec3 n_out2p0 = vec3(1.0) - (vec3(1.0) - n_out7p0) * (vec3(1.0) - n_out5p0);
+
+// Output:0
+	COLOR.rgb = n_out2p0;
+	COLOR.a = n_out5p1;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+custom_defines = ""
+graph_offset = Vector2( -1642.73, -75.6 )
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource( 3 )
+nodes/fragment/2/position = Vector2( 120, 0 )
+nodes/fragment/3/node = SubResource( 4 )
+nodes/fragment/3/position = Vector2( -400, 300 )
+nodes/fragment/4/node = SubResource( 5 )
+nodes/fragment/4/position = Vector2( -400, 200 )
+nodes/fragment/5/node = SubResource( 6 )
+nodes/fragment/5/position = Vector2( -120, 160 )
+nodes/fragment/6/node = SubResource( 7 )
+nodes/fragment/6/position = Vector2( -1700, 20 )
+nodes/fragment/7/node = SubResource( 8 )
+nodes/fragment/7/position = Vector2( -320, 0 )
+nodes/fragment/8/node = SubResource( 9 )
+nodes/fragment/8/position = Vector2( -1220, 20 )
+nodes/fragment/9/node = SubResource( 10 )
+nodes/fragment/9/position = Vector2( -940, 0 )
+nodes/fragment/10/node = SubResource( 1 )
+nodes/fragment/10/position = Vector2( -660, 20 )
+nodes/fragment/11/node = SubResource( 13 )
+nodes/fragment/11/position = Vector2( -1200, 120 )
+nodes/fragment/12/node = SubResource( 14 )
+nodes/fragment/12/position = Vector2( -1700, 120 )
+nodes/fragment/13/node = SubResource( 15 )
+nodes/fragment/13/position = Vector2( -1460, 0 )
+nodes/fragment/connections = PoolIntArray( 4, 0, 5, 0, 3, 0, 5, 2, 5, 1, 0, 1, 2, 0, 0, 0, 9, 0, 10, 0, 8, 0, 9, 0, 10, 0, 7, 0, 10, 0, 7, 1, 10, 0, 7, 2, 7, 0, 2, 0, 5, 0, 2, 1, 11, 0, 9, 1, 6, 0, 13, 0, 12, 0, 13, 1, 13, 0, 8, 0 )
+
+[sub_resource type="ShaderMaterial" id=53]
+resource_local_to_scene = true
+shader = SubResource( 52 )
+shader_param/AnimationSpeed = 2.0
+shader_param/AnimationMultiplier = 0.0
 
 [node name="SpecialBar" type="HBoxContainer"]
 script = ExtResource( 1 )
@@ -10,94 +1985,113 @@ __meta__ = {
 }
 
 [node name="SpecialCounter" parent="." instance=ExtResource( 2 )]
+material = SubResource( 17 )
 margin_bottom = 12.0
 
 [node name="SpecialCounter2" parent="." instance=ExtResource( 2 )]
+material = SubResource( 19 )
 margin_left = 16.0
 margin_right = 28.0
 margin_bottom = 12.0
 
 [node name="SpecialCounter3" parent="." instance=ExtResource( 2 )]
+material = SubResource( 21 )
 margin_left = 32.0
 margin_right = 44.0
 margin_bottom = 12.0
 
 [node name="SpecialCounter4" parent="." instance=ExtResource( 2 )]
+material = SubResource( 23 )
 margin_left = 48.0
 margin_right = 60.0
 margin_bottom = 12.0
 
 [node name="SpecialCounter5" parent="." instance=ExtResource( 2 )]
+material = SubResource( 25 )
 margin_left = 64.0
 margin_right = 76.0
 margin_bottom = 12.0
 
 [node name="SpecialCounter6" parent="." instance=ExtResource( 2 )]
+material = SubResource( 27 )
 margin_left = 80.0
 margin_right = 92.0
 margin_bottom = 12.0
 
 [node name="SpecialCounter7" parent="." instance=ExtResource( 2 )]
+material = SubResource( 29 )
 margin_left = 96.0
 margin_right = 108.0
 margin_bottom = 12.0
 
 [node name="SpecialCounter8" parent="." instance=ExtResource( 2 )]
+material = SubResource( 31 )
 margin_left = 112.0
 margin_right = 124.0
 margin_bottom = 12.0
 
 [node name="SpecialCounter9" parent="." instance=ExtResource( 2 )]
+material = SubResource( 33 )
 margin_left = 128.0
 margin_right = 140.0
 margin_bottom = 12.0
 
 [node name="SpecialCounter10" parent="." instance=ExtResource( 2 )]
+material = SubResource( 35 )
 margin_left = 144.0
 margin_right = 156.0
 margin_bottom = 12.0
 
 [node name="SpecialCounter11" parent="." instance=ExtResource( 2 )]
+material = SubResource( 37 )
 margin_left = 160.0
 margin_right = 172.0
 margin_bottom = 12.0
 
 [node name="SpecialCounter12" parent="." instance=ExtResource( 2 )]
+material = SubResource( 39 )
 margin_left = 176.0
 margin_right = 188.0
 margin_bottom = 12.0
 
 [node name="SpecialCounter13" parent="." instance=ExtResource( 2 )]
+material = SubResource( 41 )
 margin_left = 192.0
 margin_right = 204.0
 margin_bottom = 12.0
 
 [node name="SpecialCounter14" parent="." instance=ExtResource( 2 )]
+material = SubResource( 43 )
 margin_left = 208.0
 margin_right = 220.0
 margin_bottom = 12.0
 
 [node name="SpecialCounter15" parent="." instance=ExtResource( 2 )]
+material = SubResource( 45 )
 margin_left = 224.0
 margin_right = 236.0
 margin_bottom = 12.0
 
 [node name="SpecialCounter16" parent="." instance=ExtResource( 2 )]
+material = SubResource( 47 )
 margin_left = 240.0
 margin_right = 252.0
 margin_bottom = 12.0
 
 [node name="SpecialCounter17" parent="." instance=ExtResource( 2 )]
+material = SubResource( 49 )
 margin_left = 256.0
 margin_right = 268.0
 margin_bottom = 12.0
 
 [node name="SpecialCounter18" parent="." instance=ExtResource( 2 )]
+material = SubResource( 51 )
 margin_left = 272.0
 margin_right = 284.0
 margin_bottom = 12.0
 
 [node name="SpecialCounter19" parent="." instance=ExtResource( 2 )]
+material = SubResource( 53 )
 margin_left = 288.0
 margin_right = 300.0
 margin_bottom = 12.0
