@@ -4,10 +4,6 @@ var current_index = 0;
 
 func _ready():
 	clear();
-	for i in range(5):
-		push_special(Special_Counter.State.Slack)
-		push_special(Special_Counter.State.Tense)
-	show_cost(3, 2)
 
 func push_special(special: int):
 	get_child(current_index).current_state = special;
@@ -46,6 +42,10 @@ func show_cost(num_tension: int, num_slack: int):
 			child.start_animation()
 			print("Animating")
 		print(current_index, num_tension, num_slack)
+
+func clear_cost():
+	for child in get_children():
+		child.stop_animation()
 
 func clear():
 	for child in get_children():

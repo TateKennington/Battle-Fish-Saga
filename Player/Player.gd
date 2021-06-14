@@ -13,9 +13,17 @@ func get_moves_list() -> Dictionary:
 		"specials": []
 	};
 	for basic in abilities.get_node("basics").get_children():
-		result["basics"].push_back(basic.get_name().to_lower())
+		var move = {
+			"name": basic.get_name().to_lower()
+		}
+		result["basics"].push_back(move)
 	for special in abilities.get_node("specials").get_children():
-		result["specials"].push_back(special.get_name().to_lower())
+		var move = {
+			"name": special.get_name().to_lower(),
+			"tension_cost": special.get_tension_cost(),
+			"slack_cost": special.get_slack_cost(),
+		}
+		result["specials"].push_back(move)
 	return result;
 
 func get_animations_list() -> Array:

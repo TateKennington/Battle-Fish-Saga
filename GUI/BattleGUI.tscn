@@ -126,4 +126,5 @@ margin_left = 51.0
 margin_top = 32.0
 margin_right = 51.0
 margin_bottom = 32.0
+[connection signal="hovered" from="Panel/CenterContainer/Menu" to="." method="hover_move"]
 [connection signal="selected" from="Panel/CenterContainer/Menu" to="." method="select_move"]

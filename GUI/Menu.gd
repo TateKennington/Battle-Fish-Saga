@@ -4,6 +4,7 @@ extends VBoxContainer
 class_name Menu
 
 signal selected(index)
+signal hovered(index)
 
 onready var move_label = preload("res://GUI/Components/MenuItem/MenuItem.tscn");
 
@@ -26,7 +27,7 @@ func _input(event):
 			emit_signal("selected", active)
 		active = clamp(active, 0, get_child_count() - 1)
 		update_items()
-		print(active)
+		emit_signal("hovered", active)
 
 func update_items():
 	if active < top:

@@ -7,3 +7,9 @@ func ability():
 
 func get_name() -> String:
 	return name;
+
+func get_tension_cost():
+	return 0
+	
+func get_slack_cost():
+	return 0

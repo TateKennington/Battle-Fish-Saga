@@ -1,12 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/Abilities/ReelIn/ReelIn.gd" type="Script" id=2]
 [ext_resource path="res://Player/Abilities/GiveItSlack/GiveItSlack.gd" type="Script" id=3]
 [ext_resource path="res://Player/Player.png" type="Texture" id=4]
-
-
-
+[ext_resource path="res://Player/Test.gd" type="Script" id=5]
 
 [node name="Player" type="Node2D"]
 script = ExtResource( 1 )
@@ -25,3 +23,6 @@ script = ExtResource( 2 )
 script = ExtResource( 3 )
 
 [node name="specials" type="Node2D" parent="Abilities"]
+
+[node name="Test" type="Node2D" parent="Abilities/specials"]
+script = ExtResource( 5 )
