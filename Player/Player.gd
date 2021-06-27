@@ -4,42 +4,9 @@ class_name Player
 
 onready var abilities = $Abilities;
 
-func perform_move(type: String, index: int):
-	abilities.get_node(type).get_child(index).ability();
-
-func get_moves_list() -> Dictionary:
-	var result = {
-		"basics": [],
-		"specials": []
-	};
-	for basic in abilities.get_node("basics").get_children():
-		var move = {
-			"name": basic.get_name().to_lower()
-		}
-		result["basics"].push_back(move)
-	for special in abilities.get_node("specials").get_children():
-		var move = {
-			"name": special.get_name().to_lower(),
-			"tension_cost": special.get_tension_cost(),
-			"slack_cost": special.get_slack_cost(),
-		}
-		result["specials"].push_back(move)
-	return result;
-
-func get_animations_list() -> Array:
-	var result = [];
-	for basic in abilities.get_node("basics").get_children():
-		if 'fish_animation' in basic:
-			result.push_back({
-				'name': basic.get_name().to_lower(),
-				'fish': basic.fish_animation,
-			})
-	#for special in abilities.get_node("specials").get_children():
-	#	result["specials"].push_back(special.get_name().to_lower())
-	return result;
+func get_moves_list() -> Array:
+	return abilities.get_children();
 
 func connect_abilities(reciever: Object):
-	for basic in abilities.get_node("basics").get_children():
-		basic.connect('move', reciever, 'on_move')
-	for special in abilities.get_node("specials").get_children():
-		special.connect('move', reciever, 'on_move')
+	for ability in abilities.get_children():
+		ability.connect('move', reciever, 'on_move')

@@ -12,15 +12,17 @@ var tension: float = 0;
 var time: float = 0;
 
 func _ready():
-	gui.connect("choose_move", player, "perform_move")
 	enemy.connect("move", self, "on_move");
 	player.connect_abilities(self)
 	gui.set_tension(0)
 	gui.set_distance(0)
-	gui.set_moves_list(player.get_moves_list())
-	var animations = player.get_animations_list();
-	for animation in animations:
-		enemy.add_animation(animation.name, animation.fish)
+	
+	var move_list = player.get_moves_list();
+	gui.set_moves_list(move_list)
+	for move in move_list:
+		if move.fish_animation == null:
+			continue
+		enemy.add_animation(move.move_name.to_lower(), move.fish_animation)
 	play_turn();
 	
 func play_turn():

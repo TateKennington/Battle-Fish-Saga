@@ -14,15 +14,11 @@ texture = ExtResource( 4 )
 
 [node name="Abilities" type="Node2D" parent="."]
 
-[node name="basics" type="Node2D" parent="Abilities"]
-
-[node name="ReelIn" type="Node2D" parent="Abilities/basics"]
+[node name="ReelIn" type="Node2D" parent="Abilities"]
 script = ExtResource( 2 )
 
-[node name="GiveItSlack" type="Node2D" parent="Abilities/basics"]
+[node name="GiveItSlack" type="Node2D" parent="Abilities"]
 script = ExtResource( 3 )
 
-[node name="specials" type="Node2D" parent="Abilities"]
-
-[node name="Test" type="Node2D" parent="Abilities/specials"]
+[node name="Test" type="Node2D" parent="Abilities"]
 script = ExtResource( 5 )

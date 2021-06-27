@@ -1,9 +1,9 @@
 extends "res://Player/Abilities/Ability.gd"
 
-var fish_animation = preload('FishAnimation.tres')
+func _ready():
+	move_name = "Reel In"
+	fish_animation = load('res://Player/Abilities/ReelIn/FishAnimation.tres')
 
 func ability():
-	emit_signal("move", 20, 20, get_name().to_lower())
+	emit_signal("move", 20, 20, move_name.to_lower())
 
-func get_name():
-	return "Reel In"
