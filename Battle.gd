@@ -9,20 +9,23 @@ onready var gui: BattleGUI = $CanvasLayer/BattleGUI;
 
 var distance: float = 0;
 var tension: float = 0;
+
+var tension_points: int = 0;
+var slack_points: int = 0;
+
 var time: float = 0;
 
 func _ready():
 	enemy.connect("move", self, "on_move");
-	player.connect_abilities(self)
 	gui.set_tension(0)
 	gui.set_distance(0)
 	
-	var move_list = player.get_moves_list();
-	gui.set_moves_list(move_list)
-	for move in move_list:
+	gui.set_moves_list(player.abilities)
+	for move in player.abilities:
 		if move.fish_animation == null:
 			continue
-		enemy.add_animation(move.move_name.to_lower(), move.fish_animation)
+		print(move.move_name)
+		enemy.add_animation(move.move_name, move.fish_animation)
 	play_turn();
 	
 func play_turn():
@@ -31,8 +34,10 @@ func play_turn():
 	check_end();
 	if tension >= 0 :
 		gui.push_special(Special_Counter.State.Tense)
+		tension_points += 1
 	else:
 		gui.push_special(Special_Counter.State.Slack)
+		slack_points += 1
 	yield(get_tree().create_timer(1), 'timeout')
 	enemy.play_turn()
 	yield(enemy, "turn_finished")
@@ -47,16 +52,21 @@ func check_end():
 		emit_signal("lose")
 		SceneManager.load_mainmenu();
 
-func on_move(distance_change: float, tension_change: float, move_name: String):
-	print(distance_change)
-	print(tension_change)
-	distance += distance_change;
-	tension += tension_change;
+func on_move(move: Ability):
+	distance += move.distance_change;
+	tension += move.tension_change;
+	
+	tension_points -= move.tension_cost;
+	slack_points -= move.slack_cost;
+	
 	gui.set_tension(tension);
 	gui.set_distance(distance);
 	
-	enemy.play_animation(move_name)
-	
+	enemy.play_animation(move.move_name)
+
+func can_use_move(move: Ability):
+	return tension_points >= move.tension_cost && slack_points >= move.slack_cost
+
 func _process(delta: float):
 	time += delta
 	$Foreground.global_position.y = 2*sin(2*time)

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Player/Abilities/Ability.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+move_name = "Donk"
+tension_cost = 0
+slack_cost = 0
+tension_change = 10
+distance_change = -10

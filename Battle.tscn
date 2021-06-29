@@ -126,3 +126,4 @@ position = Vector2( 0, 200 )
 current = true
 limit_top = 0
 limit_bottom = 300
+[connection signal="choose_move" from="CanvasLayer/BattleGUI" to="." method="on_move"]

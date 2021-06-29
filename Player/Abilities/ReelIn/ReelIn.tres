@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://Player/Abilities/Ability.gd" type="Script" id=1]
+[ext_resource path="res://Player/Abilities/ReelIn/FishAnimation.tres" type="Animation" id=2]
+
+[resource]
+script = ExtResource( 1 )
+move_name = "Reel In"
+tension_cost = 0
+slack_cost = 0
+tension_change = 20
+distance_change = 20
+fish_animation = ExtResource( 2 )
