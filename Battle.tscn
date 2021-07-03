@@ -1,8 +1,7 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Battle.gd" type="Script" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Enemy/DonkFish/DonkFish.tscn" type="PackedScene" id=3]
 [ext_resource path="res://GUI/BattleGUI.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Background/OceanBackground-Far.png" type="Texture" id=5]
 [ext_resource path="res://Background/OceanBackground-Close.png" type="Texture" id=6]
@@ -118,12 +117,4 @@ texture = ExtResource( 12 )
 centered = false
 
 [node name="Enemy" type="Node2D" parent="ViewportContainer/Viewport"]
-
-[node name="DonkFish" parent="ViewportContainer/Viewport/Enemy" instance=ExtResource( 3 )]
-position = Vector2( 0, 200 )
-
-[node name="Camera2D" type="Camera2D" parent="ViewportContainer/Viewport/Enemy/DonkFish"]
-current = true
-limit_top = 0
-limit_bottom = 300
 [connection signal="choose_move" from="CanvasLayer/BattleGUI" to="." method="on_move"]

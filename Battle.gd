@@ -4,9 +4,9 @@ signal win;
 signal lose;
 
 onready var player: Player = $Player;
-onready var enemy: Enemy = $ViewportContainer/Viewport/Enemy.get_child(0);
 onready var gui: BattleGUI = $CanvasLayer/BattleGUI;
 
+var enemy: Enemy;
 var distance: float = 0;
 var tension: float = 0;
 
@@ -16,15 +16,18 @@ var slack_points: int = 0;
 var time: float = 0;
 
 func _ready():
-	enemy.connect("move", self, "on_move");
 	gui.set_tension(0)
 	gui.set_distance(0)
-	
 	gui.set_moves_list(player.abilities)
+	
+func connect_enemy(enemy_node):
+	$ViewportContainer/Viewport/Enemy.add_child(enemy_node)
+	enemy = enemy_node
+	enemy.position.y = 200
+	enemy.connect("move", self, "on_move");
 	for move in player.abilities:
 		if move.fish_animation == null:
 			continue
-		print(move.move_name)
 		enemy.add_animation(move.move_name, move.fish_animation)
 	play_turn();
 	

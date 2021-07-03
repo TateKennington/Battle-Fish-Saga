@@ -1,7 +1,7 @@
 extends Control
 
 func start():
-	SceneManager.load_battle();
+	SceneManager.load_levelselect();
 
 func _on_Menu_selected(index: int):
 	if index == 0:

@@ -1,0 +1,91 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://font.tres" type="BitmapFont" id=1]
+[ext_resource path="res://Levels/Level.gd" type="Script" id=2]
+[ext_resource path="res://GUI/Components/Menu/Menu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Enemy/DonkFish/DonkFish.png" type="Texture" id=4]
+[ext_resource path="res://GUI/LevelSelect.gd" type="Script" id=5]
+[ext_resource path="res://icon.png" type="Texture" id=6]
+[ext_resource path="res://Enemy/DonkFish/DonkFish.tscn" type="PackedScene" id=7]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 2 )
+name = "Donk Fish"
+description = "oh laudy hes a donkin"
+enemy_scene = ExtResource( 7 )
+enemy_sprite = ExtResource( 4 )
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 2 )
+name = "icon png"
+description = "old friend"
+enemy_sprite = ExtResource( 6 )
+
+[node name="Level Select" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+levels = [ SubResource( 1 ), SubResource( 2 ) ]
+
+[node name="Menu" parent="." instance=ExtResource( 3 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 13.0
+margin_top = 13.0
+margin_right = -335.0
+margin_bottom = -10.0
+
+[node name="Preview" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 190.0
+margin_top = 10.0
+margin_right = -13.0
+margin_bottom = -125.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Preview"]
+modulate = Color( 0.145098, 0.145098, 0.145098, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Description" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 190.0
+margin_top = 185.0
+margin_right = -13.0
+margin_bottom = -12.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Description"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+custom_fonts/font = ExtResource( 1 )
+text = "description of the donkfish here"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="hovered" from="Menu" to="." method="_on_Menu_hovered"]
+[connection signal="selected" from="Menu" to="." method="_on_Menu_selected"]
