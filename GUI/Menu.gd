@@ -6,8 +6,7 @@ class_name Menu
 signal selected(index)
 signal hovered(index)
 
-onready var move_label = preload("res://GUI/Components/MenuItem/MenuItem.tscn");
-
+export(Resource) var menu_item = preload("res://GUI/Components/MenuItem/MenuItem.tscn");
 export var window: int = 3 setget set_window;
 
 var active: int = 0;
@@ -48,8 +47,8 @@ func update_items():
 			item.show();
 	items[active].activate();
 
-func add_move(name:String, expand = false):
-	var new_label: MenuItem = move_label.instance();
+func add_item(name:String, expand = false):
+	var new_label = menu_item.instance();
 	add_child(new_label);
 	new_label.text = name;
 	new_label.expand = expand;

@@ -6,7 +6,7 @@ onready var menu: Menu = $Menu;
 
 func _ready():
 	for level in levels:
-		menu.add_move(level.name)
+		menu.add_item(level.name, true)
 
 
 func _on_Menu_selected(index):
