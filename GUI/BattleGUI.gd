@@ -82,3 +82,15 @@ func deactivate():
 
 func push_special(special:int):
 	special_bar.push_special(special)
+
+func enemy_dialog(dialog: String):
+	$EnemyDialog/Label.text = dialog
+	$EnemyDialog.visible = true
+	
+func player_dialog(dialog: String):
+	$PlayerDialog/Label.text = dialog
+	$PlayerDialog.visible = true
+	
+func clear_dialog():
+	$PlayerDialog.visible = false
+	$EnemyDialog.visible = false

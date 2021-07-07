@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://GUI/Components/TensionBar/TensionBar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://font.tres" type="BitmapFont" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://GUI/Components/Menu/Menu.tscn" type="PackedScene" id=4]
 [ext_resource path="res://GUI/Dashboard.png" type="Texture" id=5]
 [ext_resource path="res://GUI/Components/SpecialBar/SpecialBar.tscn" type="PackedScene" id=6]
+[ext_resource path="res://GUI/Components/MenuItem/MenuItem.tscn" type="PackedScene" id=7]
 
 [node name="BattleGUI" type="Control"]
 anchor_right = 1.0
@@ -19,6 +20,9 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="StatsPanel" type="Panel" parent="."]
 anchor_top = 1.0
@@ -126,5 +130,46 @@ margin_left = 51.0
 margin_top = 32.0
 margin_right = 51.0
 margin_bottom = 32.0
+menu_item = ExtResource( 7 )
+window = 3
+
+[node name="EnemyDialog" type="Panel" parent="."]
+visible = false
+anchor_left = 0.048
+anchor_top = 0.073
+anchor_right = 0.439
+anchor_bottom = 0.682
+margin_left = 7.99694
+margin_top = 7.2459
+margin_right = -7.19507
+margin_bottom = -141.454
+
+[node name="Label" type="Label" parent="EnemyDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1.52588e-05
+margin_bottom = 1.00001
+custom_fonts/font = ExtResource( 2 )
+align = 1
+valign = 1
+
+[node name="PlayerDialog" type="Panel" parent="."]
+visible = false
+margin_left = 289.524
+margin_top = 181.72
+margin_right = 474.524
+margin_bottom = 216.72
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="PlayerDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 2 )
+align = 1
+valign = 1
+autowrap = true
 [connection signal="hovered" from="Panel/CenterContainer/Menu" to="." method="hover_move"]
 [connection signal="selected" from="Panel/CenterContainer/Menu" to="." method="select_move"]

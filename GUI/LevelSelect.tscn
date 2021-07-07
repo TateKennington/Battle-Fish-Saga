@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://font.tres" type="BitmapFont" id=1]
 [ext_resource path="res://Levels/Level.gd" type="Script" id=2]
@@ -9,18 +9,21 @@
 [ext_resource path="res://Enemy/DonkFish/DonkFish.tscn" type="PackedScene" id=7]
 [ext_resource path="res://GUI/Components/MenuTile/MenuTile.tscn" type="PackedScene" id=8]
 
-[sub_resource type="Resource" id=1]
+[sub_resource type="Resource" id=4]
 script = ExtResource( 2 )
 name = "Donk Fish"
 description = "oh laudy hes a donkin"
 enemy_scene = ExtResource( 7 )
 enemy_sprite = ExtResource( 4 )
 
-[sub_resource type="Resource" id=2]
+[sub_resource type="Resource" id=5]
 script = ExtResource( 2 )
 name = "icon png"
 description = "old friend"
 enemy_sprite = ExtResource( 6 )
+
+[sub_resource type="Theme" id=3]
+Panel/colors/ = Color( 0.231373, 0.0196078, 0.0196078, 1 )
 
 [node name="Level Select" type="Control"]
 anchor_right = 1.0
@@ -29,7 +32,7 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-levels = [ SubResource( 1 ), SubResource( 2 ) ]
+levels = [ SubResource( 4 ), SubResource( 5 ) ]
 
 [node name="Menu" parent="." instance=ExtResource( 3 )]
 anchor_right = 1.0
@@ -73,6 +76,7 @@ margin_left = 190.0
 margin_top = 185.0
 margin_right = -10.0
 margin_bottom = -10.0
+theme = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

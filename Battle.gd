@@ -12,6 +12,7 @@ var tension: float = 0;
 
 var tension_points: int = 0;
 var slack_points: int = 0;
+var player_turn: bool = false;
 
 var time: float = 0;
 
@@ -32,19 +33,25 @@ func connect_enemy(enemy_node):
 	play_turn();
 	
 func play_turn():
+	player_turn = true
 	gui.activate();
 	yield(gui, "choose_move")
 	check_end();
+	yield(get_tree().create_timer(0.5), 'timeout')
+	gui.clear_dialog()
+	yield(get_tree().create_timer(0.5), 'timeout')
 	if tension >= 0 :
 		gui.push_special(Special_Counter.State.Tense)
 		tension_points += 1
 	else:
 		gui.push_special(Special_Counter.State.Slack)
 		slack_points += 1
-	yield(get_tree().create_timer(1), 'timeout')
+	player_turn = false
 	enemy.play_turn()
 	yield(enemy, "turn_finished")
 	check_end();
+	gui.clear_dialog()
+	yield(get_tree().create_timer(0.5), 'timeout')
 	play_turn();
 	
 func check_end():
@@ -66,6 +73,11 @@ func on_move(move: Ability):
 	gui.set_distance(distance);
 	
 	enemy.play_animation(move.move_name)
+	
+	if player_turn:
+		gui.player_dialog(move.move_name);
+	else:
+		gui.enemy_dialog(move.move_name);
 
 func can_use_move(move: Ability):
 	return tension_points >= move.tension_cost && slack_points >= move.slack_cost
