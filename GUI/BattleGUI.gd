@@ -67,6 +67,8 @@ func select_move(index: int):
 
 func hover_move(index: int):
 	var current_move: Ability = moves_list[current_menu][index]
+	tension_bar.hover_value = current_move.tension_change
+	distance_bar.hover_value = current_move.distance_change
 	if current_move.tension_cost > 0 || current_move.slack_cost > 0 && battle.can_use_move(current_move):
 		special_bar.show_cost(current_move.tension_cost, current_move.slack_cost)
 		return;
