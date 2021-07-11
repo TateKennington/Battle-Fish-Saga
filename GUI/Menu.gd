@@ -23,7 +23,7 @@ func _input(event):
 		if key.scancode == KEY_DOWN:
 			active = active + 1;
 		if key.scancode == KEY_SPACE:
-			emit_signal("selected", active)
+			return emit_signal("selected", active)
 		active = clamp(active, 0, get_child_count() - 1)
 		update_items()
 		emit_signal("hovered", active)

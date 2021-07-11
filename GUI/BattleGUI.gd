@@ -62,6 +62,8 @@ func select_move(index: int):
 	deactivate();
 	if current_move.tension_cost > 0 || current_move.slack_cost > 0:
 		special_bar.spend(current_move.tension_cost, current_move.slack_cost)
+	tension_bar.hover_value = 0
+	distance_bar.hover_value = 0
 	special_bar.clear_cost()
 	emit_signal("choose_move", current_move)
 
@@ -75,6 +77,7 @@ func hover_move(index: int):
 	special_bar.clear_cost()
 
 func activate():
+	hover_move(menu.active)
 	menu.set_process_input(true);
 	menu.visible = true;
 
