@@ -5,9 +5,10 @@
 
 [resource]
 script = ExtResource( 1 )
-move_name = "Reel In"
+move_name = "reel in"
 tension_cost = 0
 slack_cost = 0
 tension_change = 20
 distance_change = 20
 fish_animation = ExtResource( 2 )
+description = ""

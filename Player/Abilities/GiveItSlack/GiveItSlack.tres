@@ -4,8 +4,9 @@
 
 [resource]
 script = ExtResource( 1 )
-move_name = "Give it Slack"
+move_name = "give it slack"
 tension_cost = 0
 slack_cost = 0
 tension_change = -50
 distance_change = 0
+description = ""

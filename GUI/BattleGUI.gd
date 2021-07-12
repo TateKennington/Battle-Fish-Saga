@@ -17,6 +17,7 @@ var current_menu;
 func change_menu(new_menu: String):
 	current_menu = new_menu;
 	update_menu();
+	hover_move(0)
 
 func set_moves_list(moves: Array):
 	moves_list = {
@@ -71,10 +72,16 @@ func hover_move(index: int):
 	var current_move: Ability = moves_list[current_menu][index]
 	tension_bar.hover_value = current_move.tension_change
 	distance_bar.hover_value = current_move.distance_change
+	
+	if current_move.description.length() > 0:
+		player_dialog(current_move.description)
+	else:
+		clear_dialog()
+	
 	if current_move.tension_cost > 0 || current_move.slack_cost > 0 && battle.can_use_move(current_move):
 		special_bar.show_cost(current_move.tension_cost, current_move.slack_cost)
-		return;
-	special_bar.clear_cost()
+	else:
+		special_bar.clear_cost()
 
 func activate():
 	hover_move(menu.active)
