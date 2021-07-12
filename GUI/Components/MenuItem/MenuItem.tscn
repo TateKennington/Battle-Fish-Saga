@@ -11,7 +11,6 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-text = ""
 
 [node name="Container" type="Control" parent="."]
 margin_right = 12.0
@@ -30,7 +29,9 @@ __meta__ = {
 [node name="Label" type="Label" parent="."]
 margin_left = 16.0
 margin_top = 2.0
-margin_right = 16.0
+margin_right = 40.0
 margin_bottom = 10.0
 custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "text"
 align = 1

@@ -42,7 +42,7 @@ func set_moves_list(moves: Array):
 func update_menu():
 	menu.clear();
 	for move in moves_list[current_menu]:
-		menu.add_item(move.move_name)
+		menu.add_item(move.move_name, false, battle.can_use_move(move))
 
 func set_tension(tension: float):
 	tension_bar.set_value(tension)
@@ -85,6 +85,9 @@ func hover_move(index: int):
 
 func activate():
 	hover_move(menu.active)
+	var moves: Array = moves_list[current_menu];
+	for i in range(moves.size()):
+		menu.set_enabled(i, battle.can_use_move(moves[i]))
 	menu.set_process_input(true);
 	menu.visible = true;
 

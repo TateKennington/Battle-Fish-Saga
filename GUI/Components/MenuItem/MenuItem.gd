@@ -18,9 +18,9 @@ func set_expand(new_expand: bool):
 	expand = new_expand;
 	var label = get_node_or_null('Label');
 	if expand && label:
-		$Label.size_flags_horizontal = $Label.size_flags_horizontal | SIZE_EXPAND
+		label.size_flags_horizontal = label.size_flags_horizontal | SIZE_EXPAND
 	elif label:
-		$Label.size_flags_horizontal = $Label.size_flags_horizontal & ~SIZE_EXPAND
+		label.size_flags_horizontal = label.size_flags_horizontal & ~SIZE_EXPAND
 
 func activate():
 	indicator.show();
@@ -33,3 +33,11 @@ func hide():
 
 func show():
 	visible = true;
+	
+func enable():
+	var label = get_node_or_null('Label');
+	label.add_color_override("font_color", Color(1, 1, 1, 1))
+	
+func disable():
+	var label = get_node_or_null('Label');
+	label.add_color_override("font_color", Color(0, 0, 0, 1))

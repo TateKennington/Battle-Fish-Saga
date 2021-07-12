@@ -48,7 +48,7 @@ margin_right = -5.0
 margin_bottom = 19.0
 value = 10.0
 hover_value = 40.0
-hover_alpha = 0.288651
+hover_alpha = 0.161889
 
 [node name="Label" type="Label" parent="StatsPanel/Tension"]
 margin_left = 7.0
@@ -75,7 +75,7 @@ margin_right = -5.0
 margin_bottom = 19.0
 value = 10.0
 hover_value = 40.0
-hover_alpha = 0.288651
+hover_alpha = 0.161889
 
 [node name="Label" type="Label" parent="StatsPanel/Distance"]
 margin_left = 7.0

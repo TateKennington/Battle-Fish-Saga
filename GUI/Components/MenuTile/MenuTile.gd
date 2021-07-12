@@ -33,3 +33,9 @@ func hide():
 
 func show():
 	visible = true;
+	
+func enable():
+	pass
+	
+func disable():
+	pass
