@@ -40,4 +40,4 @@ func enable():
 	
 func disable():
 	var label = get_node_or_null('Label');
-	label.add_color_override("font_color", Color(0, 0, 0, 1))
+	label.add_color_override("font_color", Color(0.5, 0.5, 0.5, 1))

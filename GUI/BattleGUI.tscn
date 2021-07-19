@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://GUI/Components/TensionBar/TensionBar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://font.tres" type="BitmapFont" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://GUI/Components/Menu/Menu.tscn" type="PackedScene" id=4]
 [ext_resource path="res://GUI/Dashboard.png" type="Texture" id=5]
 [ext_resource path="res://GUI/Components/SpecialBar/SpecialBar.tscn" type="PackedScene" id=6]
+[ext_resource path="res://GUI/Components/PlayerDialog/PlayerDialog.tscn" type="PackedScene" id=7]
 
 [node name="BattleGUI" type="Control"]
 anchor_right = 1.0
@@ -48,7 +49,7 @@ margin_right = -5.0
 margin_bottom = 19.0
 value = 10.0
 hover_value = 40.0
-hover_alpha = 0.161889
+hover_alpha = 0.330434
 
 [node name="Label" type="Label" parent="StatsPanel/Tension"]
 margin_left = 7.0
@@ -75,7 +76,7 @@ margin_right = -5.0
 margin_bottom = 19.0
 value = 10.0
 hover_value = 40.0
-hover_alpha = 0.161889
+hover_alpha = 0.330434
 
 [node name="Label" type="Label" parent="StatsPanel/Distance"]
 margin_left = 7.0
@@ -154,23 +155,7 @@ custom_fonts/font = ExtResource( 2 )
 align = 1
 valign = 1
 
-[node name="PlayerDialog" type="Panel" parent="."]
+[node name="PlayerDialog" parent="." instance=ExtResource( 7 )]
 visible = false
-margin_left = 289.524
-margin_top = 181.72
-margin_right = 474.524
-margin_bottom = 216.72
-__meta__ = {
-"_edit_group_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="PlayerDialog"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_fonts/font = ExtResource( 2 )
-align = 1
-valign = 1
-autowrap = true
 [connection signal="hovered" from="Panel/CenterContainer/Menu" to="." method="hover_move"]
 [connection signal="selected" from="Panel/CenterContainer/Menu" to="." method="select_move"]

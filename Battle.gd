@@ -75,7 +75,7 @@ func on_move(move: Ability):
 	enemy.play_animation(move.move_name)
 	
 	if player_turn:
-		gui.player_dialog(move.move_name);
+		gui.player_callout(move.move_name);
 	else:
 		gui.enemy_dialog(move.move_name);
 

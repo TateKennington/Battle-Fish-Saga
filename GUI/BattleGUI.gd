@@ -10,6 +10,7 @@ onready var distance_bar: TensionBar = $StatsPanel/Distance/DistanceBar
 onready var special_bar = $StatsPanel/Special/SpecialBar
 onready var menu: Menu = $Panel/CenterContainer/Menu
 onready var battle = get_tree().root.get_node('Battle');
+onready var playerDialog: PlayerDialog = $PlayerDialog;
 
 var moves_list;
 var current_menu;
@@ -73,10 +74,7 @@ func hover_move(index: int):
 	tension_bar.hover_value = current_move.tension_change
 	distance_bar.hover_value = current_move.distance_change
 	
-	if current_move.description.length() > 0:
-		player_dialog(current_move.description)
-	else:
-		clear_dialog()
+	player_dialog(current_move)
 	
 	if current_move.tension_cost > 0 || current_move.slack_cost > 0 && battle.can_use_move(current_move):
 		special_bar.show_cost(current_move.tension_cost, current_move.slack_cost)
@@ -101,10 +99,26 @@ func push_special(special:int):
 func enemy_dialog(dialog: String):
 	$EnemyDialog/Label.text = dialog
 	$EnemyDialog.visible = true
+
+func player_callout(callout: String):
+	playerDialog.set_dialog(callout)
+	playerDialog.hide_cost()
+	playerDialog.visible = true
+
+func player_dialog(move: Ability):
+	if move.description.length() > 0:
+		playerDialog.set_dialog(move.description)
+		playerDialog.visible = true
+	else:
+		playerDialog.set_dialog('')
+		playerDialog.visible = false
 	
-func player_dialog(dialog: String):
-	$PlayerDialog/Label.text = dialog
-	$PlayerDialog.visible = true
+	if move.tension_cost > 0 || move.slack_cost > 0:
+		playerDialog.set_tension(move.tension_cost)
+		playerDialog.set_slack(move.slack_cost)
+		playerDialog.show_cost()
+	else:
+		playerDialog.hide_cost()
 	
 func clear_dialog():
 	$PlayerDialog.visible = false
