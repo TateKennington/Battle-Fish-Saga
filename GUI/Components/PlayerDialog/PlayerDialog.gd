@@ -1,4 +1,4 @@
-extends Panel
+extends NinePatchRect
 
 class_name PlayerDialog
 

@@ -39,7 +39,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://GUI/Components/MenuItem/MenuItem.gd"
 }, {
-"base": "Panel",
+"base": "NinePatchRect",
 "class": "MenuTile",
 "language": "GDScript",
 "path": "res://GUI/Components/MenuTile/MenuTile.gd"
@@ -49,7 +49,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/Player.gd"
 }, {
-"base": "Panel",
+"base": "NinePatchRect",
 "class": "PlayerDialog",
 "language": "GDScript",
 "path": "res://GUI/Components/PlayerDialog/PlayerDialog.gd"

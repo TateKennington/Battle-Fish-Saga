@@ -1,5 +1,5 @@
 tool
-extends Panel
+extends NinePatchRect
 
 class_name MenuTile
 
