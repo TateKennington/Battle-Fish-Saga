@@ -5,7 +5,7 @@ class_name Enemy
 signal turn_finished;
 signal animation_finished;
 
-onready var sprite: Sprite = $Sprite;
+onready var sprite: AnimatedSprite = $Sprite;
 onready var tween:Tween = $Tween;
 onready var anim_player:AnimationPlayer = $AnimationPlayer;
 

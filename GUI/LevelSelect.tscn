@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://font.tres" type="BitmapFont" id=1]
 [ext_resource path="res://Levels/Level.gd" type="Script" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://GUI/Components/MenuTile/MenuTile.tscn" type="PackedScene" id=8]
 [ext_resource path="res://GUI/Components/Panel.png" type="Texture" id=9]
 [ext_resource path="res://Enemy/ChonkFish/ChonkFish.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Enemy/Hucktopus/Hucktopus1.png" type="Texture" id=11]
+[ext_resource path="res://Enemy/Hucktopus/Hucktopus.tscn" type="PackedScene" id=12]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
@@ -25,7 +27,14 @@ description = ""
 enemy_scene = ExtResource( 10 )
 enemy_sprite = ExtResource( 6 )
 
-[sub_resource type="Theme" id=3]
+[sub_resource type="Resource" id=3]
+script = ExtResource( 2 )
+name = "Hucktopus"
+description = ""
+enemy_scene = ExtResource( 12 )
+enemy_sprite = ExtResource( 11 )
+
+[sub_resource type="Theme" id=4]
 Panel/colors/ = Color( 0.231373, 0.0196078, 0.0196078, 1 )
 
 [node name="Level Select" type="Control"]
@@ -35,7 +44,7 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-levels = [ SubResource( 1 ), SubResource( 2 ) ]
+levels = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ) ]
 
 [node name="Menu" parent="." instance=ExtResource( 3 )]
 anchor_right = 1.0
@@ -81,7 +90,7 @@ margin_left = 190.0
 margin_top = 185.0
 margin_right = -10.0
 margin_bottom = -10.0
-theme = SubResource( 3 )
+theme = SubResource( 4 )
 texture = ExtResource( 9 )
 patch_margin_left = 4
 patch_margin_top = 4

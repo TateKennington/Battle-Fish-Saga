@@ -1,0 +1,124 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Enemy/Hucktopus/Hucktopus1.png" type="Texture" id=1]
+[ext_resource path="res://Enemy/Enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Enemy/Hucktopus/Hucktopus2.png" type="Texture" id=3]
+[ext_resource path="res://Enemy/Hucktopus/Hucktopus3.png" type="Texture" id=4]
+[ext_resource path="res://Enemy/Hucktopus/Hucktopus4.png" type="Texture" id=5]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=2]
+resource_name = "call reinforcements"
+length = 0.46
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.2, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 3, 0, 3, 0, 3 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "fight with fish"
+length = 0.46
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.2, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 2, 0, 2, 0, 2 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "lower anchor"
+length = 0.46
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.2, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 0, 1, 0, 1, 0 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "raise anchor"
+length = 0.46
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.2, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 0, 1, 0, 1 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "release"
+length = 0.46
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.2, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 0, 2, 0, 2, 0 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "retreat"
+length = 0.46
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.2, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 0, 3, 0, 3, 0 ]
+}
+
+[node name="Hucktopus" instance=ExtResource( 2 )]
+
+[node name="Sprite" parent="." index="0"]
+frames = SubResource( 1 )
+
+[node name="AnimationPlayer" parent="." index="2"]
+"anims/call reinforcements" = SubResource( 2 )
+"anims/fight with fish" = SubResource( 3 )
+"anims/lower anchor" = SubResource( 4 )
+"anims/raise anchor" = SubResource( 5 )
+anims/release = SubResource( 6 )
+anims/retreat = SubResource( 7 )
